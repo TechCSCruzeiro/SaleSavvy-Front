@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form (ngSubmit)="submit()" [formGroup]="usuarioForm" #formDir="ngForm">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome" formControlName="nome">
+              <label for="floatingInput">Nome</label>
+              <div class="text-danger ms-2 mt-1" *ngIf="nome.invalid && formDir.submitted">
+                <p>Nome Invalido!</p>
+              </div>
+            </div>
+            
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" placeholder="name@example.com">
+              <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="senha" placeholder="Senha">
+              <label for="floatingPassword">Senha</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="senha" placeholder="Senha">
+              <label for="floatingPassword">Confirme sua senha</label>
+            </div>
+            <div class="form-floating mt-4">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
