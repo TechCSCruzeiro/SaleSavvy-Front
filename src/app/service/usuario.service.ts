@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrl = 'https://localhost:44351/weatherforecast'
+    private apiUrl = 'https://localhost:44351/usuario/incluir'
     
     constructor(private http: HttpClient) {
 
@@ -19,7 +19,7 @@ export class UsuarioService {
         return this.http.get(this.apiUrl);
     }
 
-    criarUsuario(novoUsuario: Usuario): Observable<Usuario> {
+    createUser(novoUsuario: Usuario): Observable<Usuario> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

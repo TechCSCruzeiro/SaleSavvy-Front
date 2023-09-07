@@ -29,6 +29,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstoqueComponent } from './components/pages/estoque/estoque.component';
 import { UsuarioComponent } from './components/pages/usuario/usuario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeadearComponent,
     EstoqueComponent,
     UsuarioComponent,
+    MessagesComponent,
 
   ],
   imports: [
@@ -64,7 +67,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbAlert,
     NgbNavModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
