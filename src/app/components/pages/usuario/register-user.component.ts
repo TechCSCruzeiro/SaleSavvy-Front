@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 import { ValidationPassword } from 'src/app/function/ValidationPassword';
 import { Usuario } from 'src/app/Models/Usuario';
 
+
+import { MessagesSuccessService } from 'src/app/service/messages-success.service';
+import { MessagesErrorService } from 'src/app/service/messages-error.service';
+
 @Component({
   selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.css']
 })
 export class UsuarioComponent implements OnInit {
 
   usuarioForm!: FormGroup
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService, public messagesSucessService: MessagesSuccessService, public messagesErrorService: MessagesErrorService ,private router: Router ) {
   }
 
   ngOnInit(): void {
@@ -59,8 +64,11 @@ export class UsuarioComponent implements OnInit {
     const usuario: Usuario = this.FormUsuario(this.usuarioForm)
     console.log(usuario)
     this.usuarioService.createUser(usuario).subscribe((response) =>{
-     console.log("Usuario Criado com Sucesso")
+      this.messagesSucessService.add("Usuario Criado Com sucesso")
+      this.router.navigate(['/'])
     },(error) =>{
+      this.messagesErrorService.add('Erro ao Criar o usuario ' + error.error)
+      this.router.navigate(['/'])
       console.log("Erro ao Criar o Usuario", error)
     })
   }

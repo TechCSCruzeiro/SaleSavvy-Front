@@ -15,6 +15,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
+
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,10 +28,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstoqueComponent } from './components/pages/estoque/estoque.component';
-import { UsuarioComponent } from './components/pages/usuario/usuario.component';
+import { UsuarioComponent } from './components/pages/usuario/register-user.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MessagesComponent } from './components/messages/messages.component';
+import { MessagesErrorComponent } from './components/messages/messages-error/messages-error.component';
+import { MessagesSuccessComponent } from './components/messages/messages-success/messages-success.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,9 @@ import { MessagesComponent } from './components/messages/messages.component';
     EstoqueComponent,
     UsuarioComponent,
     MessagesComponent,
+    MessagesErrorComponent,
+    MessagesSuccessComponent,
+    HomeComponent,
 
   ],
   imports: [
@@ -68,7 +75,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     NgbNavModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
