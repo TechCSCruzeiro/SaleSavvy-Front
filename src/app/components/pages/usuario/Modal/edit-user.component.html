@@ -1,38 +1,46 @@
 <div class="modal-content">
   <h2 mat-dialog-title>Editar Usuario</h2>
   <hr>
-  <form>
+  <form (ngSubmit)="submit()" [formGroup]="usuarioForm" #formDir="ngForm">
+
     <mat-form-field class="inputs">
       <mat-label>Nome: </mat-label>
-      <input matInput type="text" [(ngModel)]="user.name" name="value">
+      <input matInput type="text" [(ngModel)]="user.name" name="name" formControlName="name">
       <button *ngIf="user.name" matSuffix mat-icon-button aria-label="Clear" (click)="user.name=''">
         <mat-icon>close</mat-icon>
       </button>
+      <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
+        <p>Nome Invalido!</p>
+      </div>
     </mat-form-field>
+
     <mat-form-field class="inputs">
       <mat-label>Email: </mat-label>
-      <input matInput type="email" [(ngModel)]="user.email" name="email">
+      <input matInput type="email" [(ngModel)]="user.email" name="email" formControlName="email">
       <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+
     <mat-form-field class="inputs">
       <mat-label>Senha: </mat-label>
-      <input matInput type="password" [(ngModel)]="user.password" name="senha">
+      <input matInput type="password" [(ngModel)]="user.password" name="senha" formControlName="senha">
       <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+
     <mat-form-field class="inputs">
-      <mat-label>Confirme a senha: </mat-label>
-      <input matInput type="password" [(ngModel)]="user.password" name="senha2">
+      <mat-label>Confirme a Senha: </mat-label>
+      <input matInput type="password" [(ngModel)]="user.password" name="senha2" formControlName="senha2">
       <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+
   </form>
   <div mat-dialog-actions class="button">
     <button mat-button>Fechar</button>
-    <button mat-button cdkFocusInitial (click)="Info()">Atualizar cadastro</button>
+    <button type="submit" mat-button cdkFocusInitial (click)="submit()">Atualizar cadastro</button>
   </div>
 </div>
