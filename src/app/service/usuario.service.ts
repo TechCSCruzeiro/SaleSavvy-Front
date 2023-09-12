@@ -10,13 +10,17 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrl = 'https://localhost:44351/usuario/incluir'
-    
+    private apiUrlPost = 'https://localhost:44351/usuario/incluir'
+    private apiUrlGet = 'https://localhost:44351/usuario/listar'
+
     constructor(private http: HttpClient) {
 
     }
-    getAll(): Observable<any>{
-        return this.http.get(this.apiUrl);
+
+    
+
+    getUsers(): Observable<Usuario[]>{
+        return this.http.get<Usuario[]>(this.apiUrlGet);
     }
 
     createUser(novoUsuario: Usuario): Observable<Usuario> {
@@ -25,7 +29,7 @@ export class UsuarioService {
                 'Content-Type': 'application/json'
             })
         };
-        return this.http.post<Usuario>(this.apiUrl, novoUsuario, httpOptions)
+        return this.http.post<Usuario>(this.apiUrlPost, novoUsuario, httpOptions)
     }
 
 }
