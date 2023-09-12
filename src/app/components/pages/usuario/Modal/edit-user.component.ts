@@ -1,26 +1,28 @@
-import { Component, Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {NgIf} from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, Input, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Usuario } from 'src/app/Models/Usuario';
+import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  standalone: true,
-  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
-export class EditUserComponent {
-  constructor(
-    public dialogRef: MatDialogRef<EditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Usuario,
-  ) {}
+export class EditUserComponent implements OnInit{
+  userId!:string;
+  user!: Usuario;
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private usuarioService: UsuarioService){
+    this.userId = data.userId
+  }
+
+  ngOnInit() {
+    this.usuarioService.getUserById(this.userId).subscribe(user => {
+      this.user = user
+    })
+  }
+
+  Info(){
+    console.log(this.user)
   }
 }

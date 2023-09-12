@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 export class UsuarioService {
     private apiUrlPost = 'https://localhost:44351/usuario/incluir'
     private apiUrlGet = 'https://localhost:44351/usuario/listar'
+    private apiUrlGetById = 'https://localhost:44351/usuario/localizar'
 
     constructor(private http: HttpClient) {
 
@@ -21,6 +22,10 @@ export class UsuarioService {
 
     getUsers(): Observable<Usuario[]>{
         return this.http.get<Usuario[]>(this.apiUrlGet);
+    }
+
+    getUserById(userId: string): Observable<Usuario>{
+        return this.http.get<Usuario>(`${this.apiUrlGetById}/${userId}`);
     }
 
     createUser(novoUsuario: Usuario): Observable<Usuario> {

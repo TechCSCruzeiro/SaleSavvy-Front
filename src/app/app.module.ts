@@ -16,6 +16,7 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -78,6 +79,7 @@ import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.co
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
