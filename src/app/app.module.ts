@@ -37,6 +37,7 @@ import { MessagesErrorComponent } from './components/messages/messages-error/mes
 import { MessagesSuccessComponent } from './components/messages/messages-success/messages-success.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.component';
+import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-user.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.co
     MessagesSuccessComponent,
     HomeComponent,
     EditUserComponent,
+    RemoveUserComponent,
 
   ],
   imports: [

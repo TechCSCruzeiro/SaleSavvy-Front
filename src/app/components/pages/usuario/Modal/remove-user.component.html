@@ -1,0 +1,10 @@
+<div class="modal-content">
+    <h1 mat-dialog-title>Delete file</h1>
+    <div mat-dialog-content>
+        Tem certeza que deseja remover: <strong>{{name}}</strong>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close color="primary">Não</button>
+        <button mat-button color="warn"(click)="RemoveUser()">Sim</button>
+    </div>
+</div>

@@ -15,5 +15,17 @@ mat-button-toggle-group{
     border: none;
 }
 
-.mat-elevation-z8{
+h1{
+  margin-top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.header{
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonUser{
+  margin-top: 10px;
 }

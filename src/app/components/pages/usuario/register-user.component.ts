@@ -51,9 +51,9 @@ export class UsuarioComponent implements OnInit {
 
   FormUsuario(form: FormGroup): Usuario {
     return {
-      name: form.get('name')!.value,
-      email: form.get('email')!.value,
-      password: form.get('senha')!.value,
+      Name: form.get('name')!.value,
+      Email: form.get('email')!.value,
+      Password: form.get('senha')!.value,
     }
   }
 

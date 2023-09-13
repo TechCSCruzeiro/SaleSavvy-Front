@@ -5,8 +5,8 @@
 
     <mat-form-field class="inputs">
       <mat-label>Nome: </mat-label>
-      <input matInput type="text" [(ngModel)]="user.name" name="name" formControlName="name">
-      <button *ngIf="user.name" matSuffix mat-icon-button aria-label="Clear" (click)="user.name=''">
+      <input matInput type="text" [(ngModel)]="user.Name" name="name" formControlName="name">
+      <button *ngIf="user.Name" matSuffix mat-icon-button aria-label="Clear" (click)="user.Name=''">
         <mat-icon>close</mat-icon>
       </button>
       <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
@@ -16,31 +16,34 @@
 
     <mat-form-field class="inputs">
       <mat-label>Email: </mat-label>
-      <input matInput type="email" [(ngModel)]="user.email" name="email" formControlName="email">
-      <button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
+      <input matInput type="email" [(ngModel)]="user.Email" name="email" formControlName="email">
+      <button *ngIf="user.Email" matSuffix mat-icon-button aria-label="Clear" (click)="user.Email=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
 
     <mat-form-field class="inputs">
       <mat-label>Senha: </mat-label>
-      <input matInput type="password" [(ngModel)]="user.password" name="senha" formControlName="senha">
-      <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
+      <input matInput type="password" [(ngModel)]="user.Password" name="senha" formControlName="senha">
+      <button *ngIf="user.Password" matSuffix mat-icon-button aria-label="Clear" (click)="user.Password=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
 
     <mat-form-field class="inputs">
       <mat-label>Confirme a Senha: </mat-label>
-      <input matInput type="password" [(ngModel)]="user.password" name="senha2" formControlName="senha2">
-      <button *ngIf="user.password" matSuffix mat-icon-button aria-label="Clear" (click)="user.password=''">
+      <input matInput type="password" [(ngModel)]="confirmSenha" name="senha2" formControlName="senha2">
+      <button *ngIf="confirmSenha" matSuffix mat-icon-button aria-label="Clear" (click)="confirmSenha=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+    <div class="text-danger ms-2 mt-1" *ngIf="usuarioForm.get('senha')!.value !== usuarioForm.get('senha2')!.value">
+      <p>As senhas não coincidem</p>
+    </div>
 
   </form>
   <div mat-dialog-actions class="button">
-    <button mat-button>Fechar</button>
+    <button mat-button (click)="FecharModal()">Fechar</button>
     <button type="submit" mat-button cdkFocusInitial (click)="submit()">Atualizar cadastro</button>
   </div>
 </div>

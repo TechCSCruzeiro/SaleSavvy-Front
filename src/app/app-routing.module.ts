@@ -11,8 +11,8 @@ const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'vendas', component: VendaComponent},
     {path: 'estoque', component: EstoqueComponent},
-    {path: 'usuario', component: UsuarioComponent},
-    {path: 'usuario/list', component: TableOverviewExample},
+    {path: 'usuario/cadastro', component: UsuarioComponent},
+    {path: 'usuario', component: TableOverviewExample},
 ];
 
 @NgModule({

@@ -24,10 +24,11 @@
         <mat-icon svgIcon="icon-estoque" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Estoque
       </button><br>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
+      <a routerLink="/usuario"><button (click)="showFiller = !showFiller" mat-raised-button>
         <mat-icon svgIcon="icon-usuario" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Usuarios
-      </button><br>
+      </button></a><br>
+      
     </mat-drawer>
         <app-messages-success></app-messages-success>
         <app-messages-error></app-messages-error>

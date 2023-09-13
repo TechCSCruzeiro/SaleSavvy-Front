@@ -12,13 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { EditUserComponent } from './Modal/edit-user.component';
+import { Usuario } from 'src/app/Models/Usuario';
+import { RemoveUserComponent } from './Modal/remove-user.component';
 
-export interface UserData {
-  //id: string;
-  name: string;
-  email: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-user-list',
@@ -29,8 +25,8 @@ export interface UserData {
 })
 export class TableOverviewExample implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'acoes'];
-  dataSource: MatTableDataSource<UserData>;
-  userId!:string;
+  dataSource: MatTableDataSource<Usuario>;
+  userId!: string;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -64,7 +60,16 @@ export class TableOverviewExample implements AfterViewInit {
   openDialog(userId: string) {
     const dialogRef = this.dialog.open(EditUserComponent, {
       width: '400px', // Defina a largura do modal conforme necessário
-      data: {userId: userId},
+      data: { userId: userId },
     })
+
   }
+  openDialogRemove(userId: string, nameUser: string) {
+    const dialogRef = this.dialog.open(RemoveUserComponent, {
+      width: '400px', 
+      data: {userId: userId, nameUser: nameUser}
+    })
+
+  }
+
 }
