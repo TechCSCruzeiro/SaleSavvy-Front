@@ -1,0 +1,44 @@
+<div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card" style="height: 400px;">
+                <div class="card-body">
+                    <div class="position-absolute top-0 start-50 translate-middle-x mt-3">
+                        <img [src]="imagemSrc" alt="Icone login">
+                    </div>
+                    <form class="example-form mt-5">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <mat-icon matSuffix>email</mat-icon>
+                            <input type="email" matInput [formControl]="emailFormControl"
+                                placeholder="Ex. pat@example.com">
+                            <mat-error
+                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Digite o email cadastrado
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email é <strong>Obrigatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Senha</mat-label>
+                            <mat-icon matSuffix>lock</mat-icon>
+                            <input type="password" matInput [formControl]="emailFormControl"
+                                placeholder="Ex. pat@example.com">
+                            <mat-error
+                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Digite a senha cadastrada
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Senha é <strong>Obrigatoria</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <div class="button mt-4">
+                            <button mat-flat-button color="primary">LOGIN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

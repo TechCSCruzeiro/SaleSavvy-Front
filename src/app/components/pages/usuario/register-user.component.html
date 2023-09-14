@@ -1,8 +1,15 @@
 <div class="container">
+  
   <div class="row">
+    
     <div class="col-md-6 mx-auto">
+      <div class="top">
+        <h1>USUARIOS CADASTRADOS</h1>
+          <a routerLink="/usuario" mat-flat-button color="primary" class="buttonUser">LISTA DE USUARIOS</a>
+      </div>
       <div class="card">
         <div class="card-body">
+          <div class="header">
           <form (ngSubmit)="submit()" [formGroup]="usuarioForm" #formDir="ngForm">
             <div class="form-floating mb-3">
               <input type="text" class="form-control" placeholder="Name" id="name" name="name" formControlName="name">

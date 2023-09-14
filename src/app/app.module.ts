@@ -38,6 +38,7 @@ import { MessagesSuccessComponent } from './components/messages/messages-success
 import { HomeComponent } from './components/home/home.component';
 import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.component';
 import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-user.component';
+import { LoginComponent } from './components/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-use
     HomeComponent,
     EditUserComponent,
     RemoveUserComponent,
+    LoginComponent,
 
   ],
   imports: [

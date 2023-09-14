@@ -14,6 +14,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { EditUserComponent } from './Modal/edit-user.component';
 import { Usuario } from 'src/app/Models/Usuario';
 import { RemoveUserComponent } from './Modal/remove-user.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class TableOverviewExample implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private usuarioService: UsuarioService, public dialog: MatDialog) {
+  constructor(private usuarioService: UsuarioService, public dialog: MatDialog, private router: Router) {
     this.dataSource = new MatTableDataSource();
   }
 
