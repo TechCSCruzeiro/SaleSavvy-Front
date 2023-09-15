@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrlPost = 'https://localhost:44351/usuario/incluir'
+    private apiUrlPost = 'https://localhost:7142/register'//'https://localhost:44351/usuario/incluir'
     private apiUrlGet = 'https://localhost:44351/usuario/listar'
     private apiUrlGetById = 'https://localhost:44351/usuario/localizar'
     private apiUrlPut = 'https://localhost:44351/usuario/alterar'

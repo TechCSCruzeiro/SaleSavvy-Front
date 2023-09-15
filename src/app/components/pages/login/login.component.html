@@ -6,33 +6,29 @@
                     <div class="position-absolute top-0 start-50 translate-middle-x mt-3">
                         <img [src]="imagemSrc" alt="Icone login">
                     </div>
-                    <form class="example-form mt-5">
+                    <form class="example-form mt-5" (ngSubmit)="submit()" #formDir="ngForm">
                         <mat-form-field class="example-full-width">
                             <mat-label>Email</mat-label>
-                            <mat-icon matSuffix>email</mat-icon>
-                            <input type="email" matInput [formControl]="emailFormControl"
-                                placeholder="Ex. pat@example.com">
-                            <mat-error
-                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Digite o email cadastrado
+                            <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                              Digite um email valido!
                             </mat-error>
                             <mat-error *ngIf="emailFormControl.hasError('required')">
-                                Email é <strong>Obrigatorio</strong>
+                              Email é <strong>Obrigatório</strong>
                             </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
+                          </mat-form-field>
+
+                          <mat-form-field class="example-full-width">
                             <mat-label>Senha</mat-label>
-                            <mat-icon matSuffix>lock</mat-icon>
-                            <input type="password" matInput [formControl]="emailFormControl"
-                                placeholder="Ex. pat@example.com">
-                            <mat-error
-                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Digite a senha cadastrada
+                            <input type="password" matInput [formControl]="passwordFormControl" placeholder="">
+                            <mat-error *ngIf="passwordFormControl.hasError('password') && !passwordFormControl.hasError('required')">
+                              Digite uma senha valida
                             </mat-error>
                             <mat-error *ngIf="emailFormControl.hasError('required')">
-                                Senha é <strong>Obrigatoria</strong>
+                              Senha é <strong>Obrigatória</strong>
                             </mat-error>
-                        </mat-form-field>
+                          </mat-form-field>
+
                         <div class="button mt-4">
                             <button mat-flat-button color="primary">LOGIN</button>
                         </div>

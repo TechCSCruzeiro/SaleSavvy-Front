@@ -64,9 +64,13 @@ export class UsuarioComponent implements OnInit {
     const usuario: Usuario = this.FormUsuario(this.usuarioForm)
     console.log(usuario)
     this.usuarioService.createUser(usuario).subscribe((response) =>{
+      const returnApi = response
+      console.log("Retorno da API > ", returnApi)
       this.messagesSucessService.add("Usuario Criado Com sucesso")
       this.router.navigate(['/'])
     },(error) =>{
+      const returnApi = error
+      console.log("Retorno da API > ", returnApi)
       this.messagesErrorService.add('Erro ao Criar o usuario ' + error.error)
       this.router.navigate(['/'])
       console.log("Erro ao Criar o Usuario", error)
