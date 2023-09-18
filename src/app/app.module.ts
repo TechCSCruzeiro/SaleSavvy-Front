@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,9 @@ import { VendaComponent } from './components/pages/venda/venda.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeadearComponent } from './components/headear/headear.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '@auth0/angular-jwt'; 
 
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -85,7 +89,13 @@ import { LoginComponent } from './components/pages/login/login.component';
     FontAwesomeModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
