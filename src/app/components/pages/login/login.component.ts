@@ -4,7 +4,12 @@ import { Login } from 'src/app/Models/Login';
 import { LoginService } from 'src/app/service/login.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { jwtConfig } from 'src/app/helpers/auth.config';
+import { AuthenticationService } from 'src/app/service/auth.service';
+import { AppComponent } from 'src/app/app.component';
+import { MessagesErrorService } from 'src/app/service/messages-error.service';
+import { MessagesSuccessService } from 'src/app/service/messages-success.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +27,12 @@ export class LoginComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email])
   passwordFormControl = new FormControl('', [Validators.required])
 
-  constructor(private loginService: LoginService){
+  constructor(private loginService: LoginService, private authService: AuthenticationService,
+    public messagesSucessService: MessagesSuccessService, 
+    public messagesErrorService: MessagesErrorService,
+    private router: Router,
+    private location: Location
+    ){
 
   }
 
@@ -40,12 +50,12 @@ export class LoginComponent {
   submit(){
     this.login = this.convertLoginModel(this.emailFormControl.value!, this.passwordFormControl.value!)
     this.loginService.postLogin(this.login).subscribe((response: any) =>{
-      localStorage.setItem('access-token', response.token)
-      console.log(localStorage.setItem)
-      const returnApi = response
-      console.log(returnApi)
+      this.authService.login(response.token)
+      location.reload();
+      this.messagesSucessService.add("Login feito com Sucesso")
     }, (error)=>{
       console.log(error)
+      this.messagesErrorService.add('Erro ao Logar ' + error.error)
     })
   }
 

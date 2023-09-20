@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '@auth0/angular-jwt'; 
+import {JwtModule} from '@auth0/angular-jwt'
 
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +44,8 @@ import { HomeComponent } from './components/home/home.component';
 import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.component';
 import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-user.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { AuthenticationService } from './service/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -88,8 +91,17 @@ import { LoginComponent } from './components/pages/login/login.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     MatDialogModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access-token');
+        }
+      }
+    }),
+
   ],
   providers: [
+    AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

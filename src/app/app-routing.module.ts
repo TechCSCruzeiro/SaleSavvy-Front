@@ -7,14 +7,15 @@ import { UsuarioComponent } from "./components/pages/usuario/register-user.compo
 import { HomeComponent } from "./components/home/home.component";
 import { TableOverviewExample } from "./components/pages/usuario/user-list.component";
 import { LoginComponent } from "./components/pages/login/login.component";
+import { AuthGuard } from "./service/auth.guard";
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: '', component: HomeComponent},
     {path: 'vendas', component: VendaComponent},
     {path: 'estoque', component: EstoqueComponent},
-    {path: 'usuario/cadastro', component: UsuarioComponent},
-    {path: 'usuario', component: TableOverviewExample},
+    {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AuthGuard]},
+    {path: 'usuario', component: TableOverviewExample, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
