@@ -51,8 +51,9 @@ export class LoginComponent {
     this.login = this.convertLoginModel(this.emailFormControl.value!, this.passwordFormControl.value!)
     this.loginService.postLogin(this.login).subscribe((response: any) =>{
       this.authService.login(response.token)
+      this.messagesSucessService.add("Login feito com Sucesso");
       location.reload();
-      this.messagesSucessService.add("Login feito com Sucesso")
+      
     }, (error)=>{
       console.log(error)
       this.messagesErrorService.add('Erro ao Logar ' + error.error)

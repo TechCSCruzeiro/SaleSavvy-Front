@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'

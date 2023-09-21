@@ -11,25 +11,22 @@ import {
   @Injectable()
 
   export class JwtInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthenticationService) {}
-  
+    constructor(private authService: AuthenticationService) {
+    }
+
     intercept(
-      request: HttpRequest<unknown>,
+      request: HttpRequest<any>,
       next: HttpHandler
-    ): Observable<HttpEvent<unknown>> {
-      // Verifique se o usuário está autenticado
-      if (this.authService.isAuthenticated()) {
-        // Obtenha o token JWT do serviço de autenticação
+    ): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('access-token');
-  
         // Clone a solicitação e adicione o cabeçalho de autorização
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      }
-  
+        if(token){
+          request = request.clone({
+            setHeaders: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        }
       return next.handle(request);
     }
   }

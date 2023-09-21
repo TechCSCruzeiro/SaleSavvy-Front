@@ -8,12 +8,4 @@ import { AuthenticationService } from 'src/app/service/auth.service';
 })
 export class HomeComponent {
 
-constructor (private authService: AuthenticationService){
-
-}
-
-deslogar () {
-  this.authService.logout()
-}
-  
 }

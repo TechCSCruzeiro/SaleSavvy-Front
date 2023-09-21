@@ -30,5 +30,11 @@ export class HeadearComponent{
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.nome = decodeToken.Name
   }
+
+  deslogar () {
+    this.authService.logout()
+    location.reload();
+  }
+
 }
 

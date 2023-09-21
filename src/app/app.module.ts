@@ -13,14 +13,14 @@ import { HeadearComponent } from './components/headear/headear.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from '@auth0/angular-jwt'; 
 import {JwtModule} from '@auth0/angular-jwt'
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
-
+import {MatMenuModule} from '@angular/material/menu';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
@@ -91,6 +91,7 @@ import { AuthenticationService } from './service/auth.service';
     ReactiveFormsModule,
     FontAwesomeModule,
     MatDialogModule,
+    MatMenuModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

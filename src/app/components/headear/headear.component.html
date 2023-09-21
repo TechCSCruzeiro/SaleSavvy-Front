@@ -1,30 +1,37 @@
 <mat-toolbar>
+    <!--Teste-->
     <button mat-icon-button class="example-icon" aria-label="Botao-menu" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span>Menu</span>
     <span class="example-spacer"></span>
     <span>{{nome}}</span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with share icon">
       <mat-icon svgIcon="icon-user"></mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="deslogar()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <button (click)="showFiller = !showFiller" mat-raised-button>
+      <button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon  aria-hidden = "false"  aria-label = "Exemplo de ícone de página inicial"  fontIcon = "home"></mat-icon>
         Home
       </button><br>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
+      <button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-vendas" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Vendas
       </button><br>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
+      <button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-estoque" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Estoque
       </button><br>
-      <a routerLink="/usuario"><button (click)="showFiller = !showFiller" mat-raised-button>
+      <a routerLink="/usuario"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-usuario" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Usuarios
       </button></a><br>
