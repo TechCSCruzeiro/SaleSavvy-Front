@@ -1,5 +1,5 @@
 
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import {NgIf} from "@angular/common";
@@ -20,8 +20,11 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -79,8 +82,6 @@ import { AuthenticationService } from './service/auth.service';
     MatFormFieldModule,
     FlexLayoutModule,
     FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatDividerModule,
     NgbModule,
     NgbPaginationModule,
@@ -92,6 +93,10 @@ import { AuthenticationService } from './service/auth.service';
     FontAwesomeModule,
     MatDialogModule,
     MatMenuModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

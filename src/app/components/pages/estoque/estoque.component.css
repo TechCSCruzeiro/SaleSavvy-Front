@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+  mat-button-toggle-group{
+    border: none;
+}
+
+h1{
+  margin-top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.header{
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonUser{
+  margin-top: 10px;
+}
