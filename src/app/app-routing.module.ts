@@ -8,11 +8,13 @@ import { HomeComponent } from "./components/home/home.component";
 import { TableOverviewExample } from "./components/pages/usuario/user-list.component";
 import { LoginComponent } from "./components/pages/login/login.component";
 import { AuthGuard } from "./service/auth.guard";
+import { AddProductComponent } from "./components/pages/estoque/addProduct/add-product.component";
 
 const routes: Routes = [
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'vendas', component: VendaComponent, canActivate: [AuthGuard]},
     {path: 'estoque', component: EstoqueComponent, canActivate: [AuthGuard]},
+    {path: 'estoque/cadastro', component: AddProductComponent, canActivate: [AuthGuard]},
     {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AuthGuard]},
     {path: 'usuario', component: TableOverviewExample, canActivate: [AuthGuard]},
 ];

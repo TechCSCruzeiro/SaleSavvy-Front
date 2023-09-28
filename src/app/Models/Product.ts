@@ -1,9 +1,9 @@
 export interface Product {
-    id?: string;
-    userID: string;
-    name: string;
-    description: string;
-    price: number;
-    quantity: number;
-    reationDate: Date;
+    Id?: string;
+    UserID: string;
+    Name: string;
+    Description: string;
+    Price: number;
+    Quantity: number;
+    CreationDate: Date;
 }

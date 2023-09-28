@@ -20,6 +20,8 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle'
+
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -48,6 +50,7 @@ import { EditUserComponent } from './components/pages/usuario/Modal/edit-user.co
 import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-user.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { AuthenticationService } from './service/auth.service';
+import { AddProductComponent } from './components/pages/estoque/addProduct/add-product.component';
 
 
 @NgModule({
@@ -65,6 +68,7 @@ import { AuthenticationService } from './service/auth.service';
     EditUserComponent,
     RemoveUserComponent,
     LoginComponent,
+    AddProductComponent,
 
   ],
   imports: [
@@ -97,6 +101,7 @@ import { AuthenticationService } from './service/auth.service';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatButtonToggleModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

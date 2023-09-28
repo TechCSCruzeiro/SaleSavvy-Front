@@ -1,0 +1,51 @@
+<div class="container">
+  
+    <div class="row">
+      
+      <div class="col-md-6 mx-auto">
+        <div class="top">
+          <h1>USUARIOS CADASTRADOS</h1>
+            <a routerLink="/usuario" mat-flat-button color="primary" class="buttonUser">LISTA DE USUARIOS</a>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="header">
+            <form (ngSubmit)="submit()" [formGroup]="productForm" #formDir="ngForm">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" placeholder="Name" id="name" name="name" formControlName="name">
+                <label for="floatingInput">Nome</label>
+                <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
+                  <p>Nome Invalido!</p>
+                </div>
+              </div>
+              
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="description" placeholder="example" id="description" name="description" formControlName="description">
+                <label for="floatingInput">Descrição</label>
+                <div class="text-danger ms-2 mt-1" *ngIf="descricao.invalid && formDir.submitted">
+                  <p>Email invalido</p>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="price" placeholder="Valor" name="price" formControlName="price">
+                <label for="floatingPassword">Senha</label>
+                <div class="text-danger ms-2 mt-1" *ngIf="senha.invalid && formDir.submitted">
+                  <p>Senha invalida</p>
+                </div>
+              </div>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="quantity" placeholder="Quantidade" name="quantity" formControlName="quantity">
+                <label for="floatingPassword">Quantidade</label>
+                <div class="text-danger ms-2 mt-1" *ngIf="productForm.get('senha')!.value !== productForm.get('senha2')!.value && formDir.submitted">
+                  <p>As senhas não coincidem</p>
+                </div>
+              </div>
+              <div class="form-floating mt-4">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
