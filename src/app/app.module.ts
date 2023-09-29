@@ -51,6 +51,7 @@ import { RemoveUserComponent } from './components/pages/usuario/Modal/remove-use
 import { LoginComponent } from './components/pages/login/login.component';
 import { AuthenticationService } from './service/auth.service';
 import { AddProductComponent } from './components/pages/estoque/addProduct/add-product.component';
+import { CurrencyFormatterDirective } from './currency-formatter.directive';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { AddProductComponent } from './components/pages/estoque/addProduct/add-p
     RemoveUserComponent,
     LoginComponent,
     AddProductComponent,
+    CurrencyFormatterDirective,
 
   ],
   imports: [

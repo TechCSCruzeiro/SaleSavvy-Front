@@ -22,22 +22,23 @@
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="description" placeholder="example" id="description" name="description" formControlName="description">
                 <label for="floatingInput">Descrição</label>
-                <div class="text-danger ms-2 mt-1" *ngIf="descricao.invalid && formDir.submitted">
-                  <p>Email invalido</p>
+                <div class="text-danger ms-2 mt-1" *ngIf="description.invalid && formDir.submitted">
+                  <p>Descrição invalida</p>
                 </div>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="price" placeholder="Valor" name="price" formControlName="price">
-                <label for="floatingPassword">Senha</label>
-                <div class="text-danger ms-2 mt-1" *ngIf="senha.invalid && formDir.submitted">
-                  <p>Senha invalida</p>
+                <input type="text" class="form-control" id="price" placeholder="Valor" name="price" formControlName="price" step="1" appCurrencyFormatter>
+                <label for="floatingPassword">Preço</label>
+                <div class="text-danger ms-2 mt-1" *ngIf="price.invalid && formDir.submitted">
+                  <p>Preço invalida</p>
                 </div>
               </div>
               <div class="form-floating">
-                <input type="text" class="form-control" id="quantity" placeholder="Quantidade" name="quantity" formControlName="quantity">
+                <input type="text" class="form-control" id="quantity" placeholder="Quantidade" name="quantity" formControlName="quantity" inputmode="numeric"
+                (input)="onInputChange($event)">
                 <label for="floatingPassword">Quantidade</label>
-                <div class="text-danger ms-2 mt-1" *ngIf="productForm.get('senha')!.value !== productForm.get('senha2')!.value && formDir.submitted">
-                  <p>As senhas não coincidem</p>
+                <div class="text-danger ms-2 mt-1" *ngIf="quantity.invalid && formDir.submitted">
+                  <p>Valor invalido coincidem</p>
                 </div>
               </div>
               <div class="form-floating mt-4">
