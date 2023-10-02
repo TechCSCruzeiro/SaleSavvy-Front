@@ -52,6 +52,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { AuthenticationService } from './service/auth.service';
 import { AddProductComponent } from './components/pages/estoque/addProduct/add-product.component';
 import { CurrencyFormatterDirective } from './currency-formatter.directive';
+import { ModalEditProductComponent } from './components/pages/estoque/modal-edit-product/modal-edit-product.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { CurrencyFormatterDirective } from './currency-formatter.directive';
     LoginComponent,
     AddProductComponent,
     CurrencyFormatterDirective,
+    ModalEditProductComponent,
 
   ],
   imports: [

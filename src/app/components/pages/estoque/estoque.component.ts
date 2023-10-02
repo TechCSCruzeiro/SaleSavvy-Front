@@ -4,7 +4,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { EstoqueService } from 'src/app/service/estoque.service';
 import { Product } from 'src/app/Models/Product';
-
+import { ModalEditProductComponent } from './modal-edit-product/modal-edit-product.component';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 
 @Component({
@@ -15,11 +16,12 @@ import { Product } from 'src/app/Models/Product';
 export class EstoqueComponent implements AfterViewInit{
   displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'creationDate', 'acoes'];
   dataSource: MatTableDataSource<Product>;
+  productId!: string;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private estoqueService: EstoqueService) {
+  constructor(private estoqueService: EstoqueService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -48,6 +50,13 @@ export class EstoqueComponent implements AfterViewInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(productId: string) {
+    const dialogRef = this.dialog.open(ModalEditProductComponent, {
+      width: '400px', // Defina a largura do modal conforme necessário
+      data: { productId: productId }
+    })
   }
 }
 

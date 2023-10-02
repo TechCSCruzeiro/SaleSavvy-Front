@@ -12,8 +12,9 @@ import {Observable} from 'rxjs';
 
 export class EstoqueService{
 
-    private apiUrlGet = 'https://localhost:7142/api/Teste'
+    private apiUrlGet = 'https://localhost:7142/api/Teste/product/list'
     private apiUrlPost = 'https://localhost:7142/api/Teste/product'
+    private apiUrlGetById = 'https://localhost:7142/api/Teste/product'
 
     constructor(private http: HttpClient) 
     {
@@ -21,6 +22,10 @@ export class EstoqueService{
 
     getProduts(): Observable<Product[]>{
         return this.http.get<Product[]>(this.apiUrlGet);
+    }
+
+    getUserById(productId: string): Observable<Product>{
+        return this.http.get<Product>(`${this.apiUrlGetById}/${productId}`);
     }
 
     createProduct(newProduct: Product): Observable<Product> {

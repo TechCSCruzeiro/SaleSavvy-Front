@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
     providedIn: 'root',
 })
 export class LoginService{
-    private ApiUrlPost = 'https://localhost:7142/api/Teste' //"https://localhost:7142/api/Autentication/login"
+    private ApiUrlPost = "https://localhost:7142/api/Teste"//"https://localhost:7142/api/Autentication/login"
 
     constructor(private http: HttpClient){
 

@@ -15,12 +15,6 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 
     this.isLoginPage = this.authService.isAuthenticated()
-    console.log("NG ONN >> ", this.authService.isAuthenticated())
-    console.log("Token", localStorage.getItem('access-token'))
-    //this.authService.authenticationChaged.subscribe((isAuthenticated) => {
-     // this.isLoginPage = isAuthenticated
-      //console.log("NG ON INIT ENTROUUUU", this.isLoginPage)
-    //})
   }
 
 }

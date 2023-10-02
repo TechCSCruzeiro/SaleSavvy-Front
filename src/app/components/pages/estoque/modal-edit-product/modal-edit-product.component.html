@@ -1,0 +1,52 @@
+<div class="modal-content">
+    <h2 mat-dialog-title>Editar Produto</h2>
+    <hr>
+    <form (ngSubmit)="submit()" [formGroup]="productForm" #formDir="ngForm">
+  
+      <mat-form-field class="inputs">
+
+        <mat-label>Nome: </mat-label>
+        <input matInput type="text" [(ngModel)]="product.Name" name="name" formControlName="name">
+        <button *ngIf="product.Name" matSuffix mat-icon-button aria-label="Clear" (click)="product.Name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <div class="text-danger ms-2 mt-1" *ngIf="formDir.submitted">
+          <p>Nome Invalido!</p>
+        </div>
+      </mat-form-field>
+  
+      <mat-form-field class="inputs">
+        <mat-label>Descrição: </mat-label>
+        <input matInput type="text" [(ngModel)]="product.Description" name="description" formControlName="description" id="price">
+        <button *ngIf="product.Description" matSuffix mat-icon-button aria-label="Clear" (click)="product.Description=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <mat-form-field class="inputs">
+        <mat-label>Preço: </mat-label>
+        <input matInput type="text" [(ngModel)]="product.Price" name="price" formControlName="price" appCurrencyFormatter [currency]="currency">
+        <button *ngIf="product.Price" matSuffix mat-icon-button aria-label="Clear" (click)="product.Price">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <mat-form-field class="inputs">
+        <mat-label>Quantidade </mat-label>
+        <input matInput type="text" [(ngModel)]="product.Quantity" name="quantity" formControlName="quantity">
+        <button *ngIf="product.Quantity" matSuffix mat-icon-button aria-label="Clear" (click)="product.Quantity">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <!--
+      <div class="text-danger ms-2 mt-1" *ngIf="productForm.get('senha')!.value !== productForm.get('senha2')!.value">
+        <p>As senhas não coincidem</p>
+      </div>
+     -->
+    </form>
+    <div mat-dialog-actions class="button">
+      <button mat-button (click)="FecharModal()">Fechar</button>
+      <button type="submit" mat-button cdkFocusInitial (click)="submit()">Atualizar cadastro</button>
+    </div>
+  </div>
+  

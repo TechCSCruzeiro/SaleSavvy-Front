@@ -46,10 +46,11 @@ export class AddProductComponent implements OnInit{
 
   FormProduct(form: FormGroup): Product {
    return {
+      Id: '',
       Name: form.get('name')!.value,
       UserID: this.UserId,
       Description: form.get('description')!.value,
-      Price: form.get('price')!.value,
+      Price: this.formatCurrencyToNumber(form.get('price')!.value),
       Quantity: form.get('quantity')!.value,
   }
 }
@@ -64,6 +65,7 @@ export class AddProductComponent implements OnInit{
     this.estoqueService.createProduct(product).subscribe((response) =>{
       const returnApi = response
       console.log("Retorno da API", returnApi)
+      console.log("Produto criado com sucesso")
       this.messagesSucessService.add("Produto Criado com sucesso")
       this.router.navigate(['/estoque'])
     },(error) =>{
@@ -76,6 +78,11 @@ export class AddProductComponent implements OnInit{
   onInputChange(event: any) {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
+  formatCurrencyToNumber(currencyValue: string): number {
+    const numericValue = parseFloat(currencyValue.replace(/[^0-9.,]/g, '').replace(',', '.'));
+    return isNaN(numericValue) ? 0 : numericValue;
   }
 
 }

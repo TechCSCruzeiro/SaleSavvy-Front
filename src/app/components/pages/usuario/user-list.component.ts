@@ -63,7 +63,6 @@ export class TableOverviewExample implements AfterViewInit {
       width: '400px', // Defina a largura do modal conforme necessário
       data: { userId: userId },
     })
-
   }
   openDialogRemove(userId: string, nameUser: string) {
     const dialogRef = this.dialog.open(RemoveUserComponent, {
