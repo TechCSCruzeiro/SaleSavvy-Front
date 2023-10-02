@@ -13,7 +13,7 @@ import {Observable} from 'rxjs';
 export class EstoqueService{
 
     private apiUrlGet = 'https://localhost:7142/api/Teste/product/list'
-    private apiUrlPost = 'https://localhost:7142/api/Teste/product'
+    private apiUrlPost = 'https://localhost:7142/api/Products/InsertProduct'
     private apiUrlGetById = 'https://localhost:7142/api/Teste/product'
 
     constructor(private http: HttpClient) 

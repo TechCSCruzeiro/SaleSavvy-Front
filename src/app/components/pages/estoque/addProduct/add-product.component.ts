@@ -81,8 +81,20 @@ export class AddProductComponent implements OnInit{
   }
 
   formatCurrencyToNumber(currencyValue: string): number {
-    const numericValue = parseFloat(currencyValue.replace(/[^0-9.,]/g, '').replace(',', '.'));
+    // Remove o ponto de milhar e substitui a vírgula pelo ponto decimal
+    const cleanedValue = currencyValue.replace(/[^0-9.]/g, '');
+    console.log("Valor Original ", currencyValue)
+    console.log(">>>>>>>>>>>>>",cleanedValue)
+    // Converte a string para um número de ponto flutuante
+    const numericValue = parseFloat(cleanedValue);
+    
     return isNaN(numericValue) ? 0 : numericValue;
   }
+  
+
+  // formatCurrencyToNumber(currencyValue: string): number {
+  //   const numericValue = parseFloat(currencyValue.replace(/[^0-9.,]/g, '').replace(',', '.'));
+  //   return isNaN(numericValue) ? 0 : numericValue;
+  // }
 
 }

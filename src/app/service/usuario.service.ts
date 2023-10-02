@@ -10,11 +10,11 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrlPost = 'https://localhost:7142/register'//'https://localhost:44351/usuario/incluir'
-    private apiUrlGet = "https://localhost:7142/api/User/listUser" //'https://localhost:44351/usuario/listar'
+    private apiUrlPost = 'https://localhost:7142/api/User/register'
+    private apiUrlGet = "https://localhost:7142/api/User/listUser"
     private apiUrlGetById = 'https://localhost:44351/usuario/localizar'
     private apiUrlPut = 'https://localhost:44351/usuario/alterar'
-    private apiUrlDelete = 'https://localhost:44351/usuario/excluir'
+    private apiUrlDelete = 'https://localhost:7142/api/User/deleteUser'
 
     constructor(private http: HttpClient) {
 
