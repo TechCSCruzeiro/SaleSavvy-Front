@@ -12,9 +12,11 @@ import {Observable} from 'rxjs';
 
 export class EstoqueService{
 
-    private apiUrlGet = 'https://localhost:7142/api/Teste/product/list'
+    private apiUrlGet = 'https://localhost:7142/api/Products/list' //'https://localhost:7142/api/Teste/product/list'
     private apiUrlPost = 'https://localhost:7142/api/Products/InsertProduct'
-    private apiUrlGetById = 'https://localhost:7142/api/Teste/product'
+    private apiUrlGetById = 'https://localhost:7142/api/Products' //'https://localhost:7142/api/Teste/product'
+    private apiUrlDelete = 'https://localhost:7142/api/Products'
+    private apiUrlPut = 'https://localhost:7142/api/Products'
 
     constructor(private http: HttpClient) 
     {
@@ -35,6 +37,14 @@ export class EstoqueService{
             })
         };
         return this.http.post<Product>(this.apiUrlPost, newProduct, httpOptions)
+    }
+
+    updateUser(updateProduct: Product): Observable<Product>{
+        return this.http.put<Product>(`${this.apiUrlPut}`, updateProduct);
+    }
+
+    deleteProduct(productId: string): Observable<any>{
+        return this.http.delete<any>(`${this.apiUrlDelete}/${productId}`);
     }
 
 }

@@ -53,6 +53,7 @@ import { AuthenticationService } from './service/auth.service';
 import { AddProductComponent } from './components/pages/estoque/addProduct/add-product.component';
 import { CurrencyFormatterDirective } from './currency-formatter.directive';
 import { ModalEditProductComponent } from './components/pages/estoque/modal-edit-product/modal-edit-product.component';
+import { ModalRemoveProductComponent } from './components/pages/estoque/modal-remove-product/modal-remove-product.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { ModalEditProductComponent } from './components/pages/estoque/modal-edit
     AddProductComponent,
     CurrencyFormatterDirective,
     ModalEditProductComponent,
+    ModalRemoveProductComponent,
 
   ],
   imports: [

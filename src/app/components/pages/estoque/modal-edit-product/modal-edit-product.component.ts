@@ -6,6 +6,7 @@ import { MessagesSuccessService } from 'src/app/service/messages-success.service
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
 import { EstoqueService } from 'src/app/service/estoque.service';
 import { Product } from 'src/app/Models/Product';
+import { ConvertCurrency } from 'src/app/function/ConvertCurrency';
 
 @Component({
   selector: 'app-modal-edit-product',
@@ -14,7 +15,6 @@ import { Product } from 'src/app/Models/Product';
 })
 export class ModalEditProductComponent implements OnInit{
 
-  currency: string = 'BRL';
   productId!:string;
   product!: Product;
   productForm!: FormGroup
@@ -66,12 +66,41 @@ export class ModalEditProductComponent implements OnInit{
     return this.productForm.get('quantity')!
   }
 
+  FormProduct(form: FormGroup): Product {
+    const converter = new ConvertCurrency();
+    return {
+      Id: this.productId!,
+      Name: form.get('name')!.value,
+      Description: form.get('description')!.value,
+      Price: converter.formatCurrencyToNumber(form.get('price')!.value),
+      Quantity: Number(form.get('quantity')!.value),
+    }
+  }
 
   FecharModal(){
     this.dialogRef.close();
   }
 
+  onInputChange(event: any) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
   submit(){
+   if (this.productForm.invalid) {
+      return;
+    }
+    const updateProduct: Product = this.FormProduct(this.productForm)
+    this.estoqueService.updateUser(updateProduct).subscribe((response) =>{
+      this.FecharModal();
+      this.messagesSucessService.add("Produto alterado com sucesso")
+      this.router.navigate(['/estoque'])
+    },(error)=>{
+      this.FecharModal();
+      this.messagesErrorService.add("Ocorreu erro ao alterar o produto " + error.error)
+      this.router.navigate(['/estoque'])
+      console.log(error)
+    })
   }
 
 }

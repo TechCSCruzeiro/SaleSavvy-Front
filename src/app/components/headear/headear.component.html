@@ -26,10 +26,10 @@
         <mat-icon svgIcon="icon-vendas" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Vendas
       </button><br>
-      <button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
+      <a routerLink="/estoque"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-estoque" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Estoque
-      </button><br>
+      </button></a><br>
       <a routerLink="/usuario"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-usuario" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Usuarios

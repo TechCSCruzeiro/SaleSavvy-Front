@@ -6,6 +6,7 @@ import { EstoqueService } from 'src/app/service/estoque.service';
 import { Product } from 'src/app/Models/Product';
 import { ModalEditProductComponent } from './modal-edit-product/modal-edit-product.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { ModalRemoveProductComponent } from './modal-remove-product/modal-remove-product.component';
 
 
 @Component({
@@ -57,6 +58,14 @@ export class EstoqueComponent implements AfterViewInit{
       width: '400px', // Defina a largura do modal conforme necessário
       data: { productId: productId }
     })
+  }
+
+  openDialogRemove(productId: string, nameProduct: string) {
+    const dialogRef = this.dialog.open(ModalRemoveProductComponent, {
+      width: '400px', 
+      data: {productId: productId, nameProduct: nameProduct}
+    })
+
   }
 }
 
