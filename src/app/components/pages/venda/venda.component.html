@@ -88,7 +88,8 @@
                     <div class="uf">
                         <mat-form-field>
                             <mat-label>UF</mat-label>
-                            <select matNativeControl required id="uf" name="uf" [(ngModel)]="addressForm.State">
+                            <select matNativeControl required id="uf" name="uf" [ngModel]="addressForm.State"
+                                (ngModelChange)="addressForm.State = $event">
                                 <option value="ac">AC</option>
                                 <option value="al">AL</option>
                                 <option value="ap">AP</option>

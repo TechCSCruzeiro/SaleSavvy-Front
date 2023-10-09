@@ -43,7 +43,6 @@ export class EditUserComponent implements OnInit{
           Password: users.password || '',
         };
       this.confirmSenha = this.user.Password
-      console.log(this.user)
     })
       this.usuarioForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
