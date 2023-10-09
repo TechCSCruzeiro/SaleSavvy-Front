@@ -1,0 +1,60 @@
+.info{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.endereco{
+    display: flex;
+    margin-top: 15px;
+}
+
+.endereco2{
+    display: flex;
+    margin-top: 15px;
+}
+
+.containerline1{
+    display: flex;
+}
+
+.containerline2{
+    display: flex;
+}
+
+.containerline3{
+    display: flex;
+}
+
+.name{
+    width: 50%;
+    margin-right: 20px;
+}
+.phone {
+    margin-right: 20px;
+}
+.email {
+    width: 30%;
+}
+
+.address{
+    width: 50%;
+    margin-right: 20px;
+}
+
+.number{
+    width: 10%;
+    margin-right: 20px;
+}
+
+.cep{
+    width: 20%;
+}
+
+.city{
+    margin-right: 20px;
+}
+
+.buttoncep{
+    margin-top: 1%;
+    margin-left: 10px;
+}

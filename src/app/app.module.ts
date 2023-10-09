@@ -54,7 +54,9 @@ import { AddProductComponent } from './components/pages/estoque/addProduct/add-p
 import { CurrencyFormatterDirective } from './currency-formatter.directive';
 import { ModalEditProductComponent } from './components/pages/estoque/modal-edit-product/modal-edit-product.component';
 import { ModalRemoveProductComponent } from './components/pages/estoque/modal-remove-product/modal-remove-product.component';
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,9 @@ import { ModalRemoveProductComponent } from './components/pages/estoque/modal-re
     MatSortModule,
     MatPaginatorModule,
     MatButtonToggleModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSelectModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

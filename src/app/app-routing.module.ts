@@ -12,7 +12,7 @@ import { AddProductComponent } from "./components/pages/estoque/addProduct/add-p
 
 const routes: Routes = [
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-    {path: 'vendas', component: VendaComponent, canActivate: [AuthGuard]},
+    {path: 'venda', component: VendaComponent, canActivate: [AuthGuard]},
     {path: 'estoque', component: EstoqueComponent, canActivate: [AuthGuard]},
     {path: 'estoque/cadastro', component: AddProductComponent, canActivate: [AuthGuard]},
     {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AuthGuard]},
