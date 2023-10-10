@@ -19,7 +19,7 @@ export class VendaComponent implements OnInit {
   ngOnInit(): void {
     this.clienteForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)],),
       email: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
@@ -55,6 +55,12 @@ export class VendaComponent implements OnInit {
   }
 
 
+  formatPhone(event: any) {
+    const inputValue = event.target.value.replace(/\D/g, ''); // Remover não dígitos
+    const formattedValue = inputValue.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+    this.clienteForm.get('phone')!.setValue(formattedValue);
+  }
+
   updateCep(cepValue: string) {
     this.addressForm.Code = cepValue;
   }
@@ -81,7 +87,20 @@ export class VendaComponent implements OnInit {
       console.log("ENTROU >> ", cepValue)
       this.addressForm = this.SearchAddress(response)
       this.renderer.setProperty(document.getElementById('uf'), 'value', this.addressForm.State.toLowerCase());
-      console.log(this.addressForm)
+
+      const { name, email, phone, number } = this.clienteForm.value;
+
+
+      this.clienteForm.setValue({
+        name, // Preencha com o valor apropriado
+        phone, // Preencha com o valor apropriado
+        email, // Preencha com o valor apropriado
+        address: this.addressForm.Address,
+        number, // Preencha com o valor apropriado
+        cep: cepValue,
+        city: this.addressForm.City,
+        uf: this.addressForm.State
+      });
     }, (error) => {
       console.log("Valor >> ", cepValue)
       const returnApi = error

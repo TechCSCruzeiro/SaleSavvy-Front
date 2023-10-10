@@ -22,7 +22,7 @@
 
                     <div class="form-floating mb-3 line1 phone">
                         <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone"
-                            formControlName="phone">
+                            formControlName="phone" (input)="formatPhone($event)">
                         <label for="floatingInput">Telefone:</label>
                         <div class="text-danger ms-2 mt-1">
                             <p>Telefone Invalido!</p>
@@ -41,7 +41,7 @@
 
                 <div class="containerline2">
                     <div class="form-floating mb-3 address">
-                        <input type="text" [(ngModel)]="addressForm.Address" class="form-control" placeholder="Address"
+                        <input type="text" class="form-control" placeholder="Address"
                             id="address" name="address" formControlName="address">
                         <label for="floatingInput">Endereço: </label>
                         <div class="text-danger ms-2 mt-1">
@@ -77,7 +77,7 @@
 
                 <div class="containerline3">
                     <div class="form-floating mb-3 city">
-                        <input type="text" [(ngModel)]="addressForm.City" class="form-control" placeholder="City"
+                        <input type="text" class="form-control" placeholder="City"
                             id="city" name="city" formControlName="city">
                         <label for="floatingInput">Cidade: </label>
                         <div class="text-danger ms-2 mt-1">
@@ -88,8 +88,7 @@
                     <div class="uf">
                         <mat-form-field>
                             <mat-label>UF</mat-label>
-                            <select matNativeControl required id="uf" name="uf" [ngModel]="addressForm.State"
-                                (ngModelChange)="addressForm.State = $event">
+                            <select matNativeControl required id="uf" name="uf">
                                 <option value="ac">AC</option>
                                 <option value="al">AL</option>
                                 <option value="ap">AP</option>

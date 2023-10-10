@@ -33,8 +33,6 @@ export class UsuarioComponent implements OnInit {
     }, {validators: ValidationPassword()});
   }
 
-
-
   get name() {
     return this.usuarioForm.get('name')!
   }
