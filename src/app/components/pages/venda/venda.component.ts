@@ -1,6 +1,9 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Address } from 'src/app/Models/Address';
+import { Client } from 'src/app/Models/Client';
+import { MessagesErrorService } from 'src/app/service/messages-error.service';
+import { MessagesSuccessService } from 'src/app/service/messages-success.service';
 import { VendaService } from 'src/app/service/venda.service';
 
 
@@ -13,18 +16,25 @@ export class VendaComponent implements OnInit {
   disabled = true;
   clienteForm!: FormGroup
   addressForm!: Address
+  errorCEP!: string
 
-  constructor(private vendaService: VendaService, private renderer: Renderer2) { }
+  constructor(
+    private vendaService: VendaService,
+    private renderer: Renderer2,
+    public messagesSucessService: MessagesSuccessService,
+    public messagesErrorService: MessagesErrorService
+  ) { }
 
   ngOnInit(): void {
     this.clienteForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)],),
-      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(14)],),
+      email: new FormControl('', [Validators.required, Validators.email]),
       address: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
-      cep: new FormControl('', [Validators.required]),
+      cep: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
       city: new FormControl('', [Validators.required]),
+      district: new FormControl('', [Validators.required]),
       uf: new FormControl('', [Validators.required]),
     })
   }
@@ -50,63 +60,112 @@ export class VendaComponent implements OnInit {
   get city() {
     return this.clienteForm.get('city')!
   }
+  get district() {
+    return this.clienteForm.get('district')!
+  }
   get uf() {
     return this.clienteForm.get('uf')!
   }
 
+  //Limpar Formulario: 
+  clearForm() {
+    this.clienteForm.get('name')!.setValue('');
+    this.clienteForm.get('phone')!.setValue('');
+    this.clienteForm.get('email')!.setValue('');
+    this.clienteForm.get('address')!.setValue('');
+    this.clienteForm.get('number')!.setValue('');
+    this.clienteForm.get('cep')!.setValue('');
+    this.clienteForm.get('city')!.setValue('');
+    this.clienteForm.get('district')!.setValue('');
+    this.clienteForm.get('uf')!.setValue('');
+  }
 
+  //Bloqueando Letras, Permitindo apenas Numero
+  onInputChange(event: any) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
+  //Formatando para (XX)XXXXX-XXXX
   formatPhone(event: any) {
-    const inputValue = event.target.value.replace(/\D/g, ''); // Remover não dígitos
-    const formattedValue = inputValue.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
-    this.clienteForm.get('phone')!.setValue(formattedValue);
+    let inputValue = event.target.value.replace(/\D/g, '');
+    const isElevenDigits = inputValue.length === 11;
+    const isOverElevenDigits = inputValue.length > 11;
+
+    if (isElevenDigits || isOverElevenDigits) {
+
+      inputValue = inputValue.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+    }
+
+    this.clienteForm.get('phone')!.setValue(inputValue);
   }
 
-  updateCep(cepValue: string) {
-    this.addressForm.Code = cepValue;
-  }
-
+  //Convertendo em Address
   SearchAddress(address: any): Address {
+    const city = address.localidade || address.city;
+    const district = address.bairro || address.district;
+    const address_ = address.logradouro || address.address;
     return {
       Code: address.cep,
       State: address.uf,
-      City: address.localidade,
-      District: address.bairro,
-      Address: address.logradouro
-
+      City: city,
+      District: district,
+      Address: address_
     }
   }
 
-  submit() {
+  //Convertendo em Client
+  FormClient(form: FormGroup): Client {
+    return {
+      Name: form.get('name')!.value,
+      Email: form.get('email')!.value,
+      Phone: form.get('phone')!.value,
+      UserID: "USER ID",
+      Address: [this.SearchAddress(form.value)]
+    }
   }
 
+  //Buscando endereço pelo CEP na API VIACEP
   SearchCEP() {
-    console.log(this.clienteForm)
     const cepValue = this.clienteForm.get('cep')!.value;
-    console.log(cepValue)
     this.vendaService.getAddress(cepValue).subscribe((response) => {
-      console.log("ENTROU >> ", cepValue)
       this.addressForm = this.SearchAddress(response)
-      this.renderer.setProperty(document.getElementById('uf'), 'value', this.addressForm.State.toLowerCase());
-
-      const { name, email, phone, number } = this.clienteForm.value;
-
-
-      this.clienteForm.setValue({
-        name, // Preencha com o valor apropriado
-        phone, // Preencha com o valor apropriado
-        email, // Preencha com o valor apropriado
-        address: this.addressForm.Address,
-        number, // Preencha com o valor apropriado
-        cep: cepValue,
-        city: this.addressForm.City,
-        uf: this.addressForm.State
-      });
+      if ('erro' in response && response.erro === true) {
+        this.errorCEP = "CEP não encontrado"
+      } else {
+        this.renderer.setProperty(document.getElementById('uf'), 'value', this.addressForm.State.toLowerCase());
+        const { name, email, phone, number } = this.clienteForm.value;
+        this.clienteForm.setValue({
+          name,
+          phone,
+          email,
+          address: this.addressForm.Address,
+          number,
+          district: this.addressForm.District,
+          cep: cepValue,
+          city: this.addressForm.City,
+          uf: this.addressForm.State
+        });
+      }
     }, (error) => {
-      console.log("Valor >> ", cepValue)
       const returnApi = error
       console.log(returnApi)
-      console.log("teste Falso")
     })
   }
 
+  //Enviando formulario para Back-end
+  submit() {
+    if (this.clienteForm.invalid) {
+      return;
+    }
+    const client: Client = this.FormClient(this.clienteForm)
+    this.vendaService.createClient(client).subscribe((response) => {
+      this.messagesSucessService.add('Cliente criado com sucesso')
+      this.clearForm()
+      this.disabled = false
+    }, (erro) => {
+      console.log(client)
+      console.log(erro)
+    })
+  }
 }
