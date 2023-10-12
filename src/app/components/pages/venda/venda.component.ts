@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Address } from 'src/app/Models/Address';
 import { Client } from 'src/app/Models/Client';
+import { AuthenticationService } from 'src/app/service/auth.service';
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
 import { MessagesSuccessService } from 'src/app/service/messages-success.service';
 import { VendaService } from 'src/app/service/venda.service';
@@ -17,13 +18,18 @@ export class VendaComponent implements OnInit {
   clienteForm!: FormGroup
   addressForm!: Address
   errorCEP!: string
+  UserId!: string
 
   constructor(
     private vendaService: VendaService,
     private renderer: Renderer2,
     public messagesSucessService: MessagesSuccessService,
-    public messagesErrorService: MessagesErrorService
-  ) { }
+    public messagesErrorService: MessagesErrorService,
+    private authService: AuthenticationService
+  ) {
+    const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
+    this.UserId = decodeToken.employeeId
+   }
 
   ngOnInit(): void {
     this.clienteForm = new FormGroup({
@@ -120,7 +126,7 @@ export class VendaComponent implements OnInit {
       Name: form.get('name')!.value,
       Email: form.get('email')!.value,
       Phone: form.get('phone')!.value,
-      UserID: "USER ID",
+      UserID: this.UserId,
       Address: [this.SearchAddress(form.value)]
     }
   }
