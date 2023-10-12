@@ -3,5 +3,6 @@ export interface Address{
     State: string,
     City: string,
     District: string,
-    Address: string
+    Street: string,
+    Number?: string,
 }

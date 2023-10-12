@@ -36,7 +36,7 @@ export class VendaComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(14)],),
       email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required]),
+      street: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
       cep: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
       city: new FormControl('', [Validators.required]),
@@ -54,8 +54,8 @@ export class VendaComponent implements OnInit {
   get email() {
     return this.clienteForm.get('email')!
   }
-  get address() {
-    return this.clienteForm.get('address')!
+  get street() {
+    return this.clienteForm.get('street')!
   }
   get number() {
     return this.clienteForm.get('number')!
@@ -78,7 +78,7 @@ export class VendaComponent implements OnInit {
     this.clienteForm.get('name')!.setValue('');
     this.clienteForm.get('phone')!.setValue('');
     this.clienteForm.get('email')!.setValue('');
-    this.clienteForm.get('address')!.setValue('');
+    this.clienteForm.get('street')!.setValue('');
     this.clienteForm.get('number')!.setValue('');
     this.clienteForm.get('cep')!.setValue('');
     this.clienteForm.get('city')!.setValue('');
@@ -110,13 +110,15 @@ export class VendaComponent implements OnInit {
   SearchAddress(address: any): Address {
     const city = address.localidade || address.city;
     const district = address.bairro || address.district;
-    const address_ = address.logradouro || address.address;
+    const address_ = address.logradouro || address.street;
+    const number = address.number || null
     return {
       Code: address.cep,
       State: address.uf,
       City: city,
       District: district,
-      Address: address_
+      Number: number,
+      Street: address_
     }
   }
 
@@ -127,7 +129,7 @@ export class VendaComponent implements OnInit {
       Email: form.get('email')!.value,
       Phone: form.get('phone')!.value,
       UserID: this.UserId,
-      Address: [this.SearchAddress(form.value)]
+      Address: this.SearchAddress(form.value)
     }
   }
 
@@ -145,7 +147,7 @@ export class VendaComponent implements OnInit {
           name,
           phone,
           email,
-          address: this.addressForm.Address,
+          street: this.addressForm.Street,
           number,
           district: this.addressForm.District,
           cep: cepValue,

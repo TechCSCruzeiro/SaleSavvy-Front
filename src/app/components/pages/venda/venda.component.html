@@ -38,11 +38,11 @@
                 </div>
 
                 <div class="containerline2">
-                    <div class="form-floating mb-3 address">
-                        <input type="text" class="form-control" placeholder="Address" id="address" name="address"
-                            formControlName="address">
+                    <div class="form-floating mb-3 street">
+                        <input type="text" class="form-control" placeholder="Street" id="street" name="street"
+                            formControlName="street">
                         <label for="floatingInput">Endereço: </label>
-                        <div class="text-danger ms-2 mt-1" *ngIf="address.invalid && formDir.submitted">
+                        <div class="text-danger ms-2 mt-1" *ngIf="street.invalid && formDir.submitted">
                             <p>Endereço Invalido!</p>
                         </div>
                     </div>

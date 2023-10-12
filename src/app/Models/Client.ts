@@ -6,5 +6,5 @@ export interface Client{
     Email: string,
     Phone: string,
     UserID: string,
-    Address: Address[];
+    Address: Address;
 }
