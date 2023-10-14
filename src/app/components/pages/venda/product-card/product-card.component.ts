@@ -29,44 +29,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./product-card.component.css']
 })
 
-
-
 export class ProductCardComponent {
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'quantidade'];
+  displayedColumns: string[] = ['name', 'quantity' , 'value', 'valueTotal', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
   availableQuantities: number[] = [];
 
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-    
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
   generateNumberList(product: PeriodicElement): number[] {
     return Array.from({ length: product.quantidade }, (_, index) => index + 1);
   }
-
 }
