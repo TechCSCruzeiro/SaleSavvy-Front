@@ -1,0 +1,36 @@
+<div class="modal-content">
+  <mat-card>
+    <mat-card-content>
+
+      <mat-form-field>
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monitor" #input>
+      </mat-form-field>
+
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> Quantidade </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>

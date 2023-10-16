@@ -58,7 +58,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { ProductCardComponent } from './components/pages/venda/product-card/product-card.component';
-
+import { ModalAddProductComponent } from './components/pages/venda/modal-add-product/modal-add-product.component';
+import {MatRippleModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { ProductCardComponent } from './components/pages/venda/product-card/prod
     ModalEditProductComponent,
     ModalRemoveProductComponent,
     ProductCardComponent,
+    ModalAddProductComponent,
 
   ],
   imports: [
@@ -117,6 +119,7 @@ import { ProductCardComponent } from './components/pages/venda/product-card/prod
     MatRadioModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatRippleModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
