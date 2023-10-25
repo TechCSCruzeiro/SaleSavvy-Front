@@ -23,7 +23,6 @@ export class AddProductComponent implements OnInit {
     public messagesErrorService: MessagesErrorService, 
     private router: Router, 
     private authService: AuthenticationService,
-    
     ) {
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))

@@ -7,6 +7,7 @@ import { Product } from 'src/app/Models/Product';
 import { ModalEditProductComponent } from './modal-edit-product/modal-edit-product.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ModalRemoveProductComponent } from './modal-remove-product/modal-remove-product.component';
+import { AuthenticationService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -18,12 +19,16 @@ export class EstoqueComponent implements AfterViewInit{
   displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'creationDate', 'acoes'];
   dataSource: MatTableDataSource<Product>;
   productId!: string;
+  userId: string = ''
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private estoqueService: EstoqueService, public dialog: MatDialog) {
+  constructor(private estoqueService: EstoqueService, public dialog: MatDialog,private authService: AuthenticationService) {
     this.dataSource = new MatTableDataSource();
+
+    const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
+    this.userId = decodeToken.employeeId
   }
 
   async ngAfterViewInit() {
@@ -31,7 +36,7 @@ export class EstoqueComponent implements AfterViewInit{
     this.dataSource.sort = this.sort;
 
     try {
-      const products = await this.estoqueService.getProduts().toPromise();
+      const products = await this.estoqueService.getProduts(this.userId).toPromise();
       if(products){
         this.dataSource.data = products;
       }else{

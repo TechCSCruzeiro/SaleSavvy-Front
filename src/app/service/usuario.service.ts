@@ -12,8 +12,8 @@ import {Observable} from 'rxjs';
 export class UsuarioService {
     private apiUrlPost = 'https://localhost:7142/api/User/register'
     private apiUrlGet = "https://localhost:7142/api/User/listUser"
-    private apiUrlGetById = 'https://localhost:44351/usuario/localizar'
-    private apiUrlPut = 'https://localhost:44351/usuario/alterar'
+    private apiUrlGetById = 'https://localhost:7142/api/User/findUserById'
+    private apiUrlPut = 'https://localhost:7142/api/User/updateUser'
     private apiUrlDelete = 'https://localhost:7142/api/User/deleteUser'
 
     constructor(private http: HttpClient) {

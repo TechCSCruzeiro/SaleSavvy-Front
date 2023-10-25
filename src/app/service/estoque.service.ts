@@ -5,6 +5,7 @@ import { Product } from '../Models/Product';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import {Observable} from 'rxjs';
+import { ModificProduct } from '../Models/ModificProduct';
 
 @Injectable({
     providedIn: 'root',
@@ -12,22 +13,22 @@ import {Observable} from 'rxjs';
 
 export class EstoqueService{
 
-    private apiUrlGet = 'https://localhost:7142/api/Products/list' //'https://localhost:7142/api/Teste/product/list'
+    private apiUrlGet = 'https://localhost:7142/api/Products/ListProduct?userId=' //'https://localhost:7142/api/Teste/product/list'
     private apiUrlPost = 'https://localhost:7142/api/Products/InsertProduct'
-    private apiUrlGetById = 'https://localhost:7142/api/Products' //'https://localhost:7142/api/Teste/product'
+    private apiUrlGetById = 'https://localhost:7142/api/Products/Find/ProductById?productId=' //'https://localhost:7142/api/Teste/product'
     private apiUrlDelete = 'https://localhost:7142/api/Products'
-    private apiUrlPut = 'https://localhost:7142/api/Products'
+    private apiUrlPut = 'https://localhost:7142/api/Products/ModificProduct'
 
     constructor(private http: HttpClient) 
     {
     }
 
-    getProduts(): Observable<Product[]>{
-        return this.http.get<Product[]>(this.apiUrlGet);
+    getProduts(userId: string): Observable<Product[]>{
+        return this.http.get<Product[]>(`${this.apiUrlGet}${userId}`);
     }
 
     getUserById(productId: string): Observable<Product>{
-        return this.http.get<Product>(`${this.apiUrlGetById}/${productId}`);
+        return this.http.get<Product>(`${this.apiUrlGetById}${productId}`);
     }
 
     createProduct(newProduct: Product): Observable<Product> {
@@ -39,8 +40,8 @@ export class EstoqueService{
         return this.http.post<Product>(this.apiUrlPost, newProduct, httpOptions)
     }
 
-    updateUser(updateProduct: Product): Observable<Product>{
-        return this.http.put<Product>(`${this.apiUrlPut}`, updateProduct);
+    updateUser(updateProduct: ModificProduct,): Observable<ModificProduct>{
+        return this.http.put<ModificProduct>(`${this.apiUrlPut}`, updateProduct);
     }
 
     deleteProduct(productId: string): Observable<any>{

@@ -7,6 +7,8 @@ import { MessagesErrorService } from 'src/app/service/messages-error.service';
 import { EstoqueService } from 'src/app/service/estoque.service';
 import { Product } from 'src/app/Models/Product';
 import { ConvertCurrency } from 'src/app/function/ConvertCurrency';
+import { AuthenticationService } from 'src/app/service/auth.service';
+import { ModificProduct } from 'src/app/Models/ModificProduct';
 
 @Component({
   selector: 'app-modal-edit-product',
@@ -18,15 +20,20 @@ export class ModalEditProductComponent implements OnInit{
   productId!:string;
   product!: Product;
   productForm!: FormGroup
+  userId: string = ''
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
   private estoqueService: EstoqueService,
   public messagesSucessService: MessagesSuccessService, 
   public messagesErrorService: MessagesErrorService,
   private router: Router,
-  private dialogRef: MatDialogRef<ModalEditProductComponent>
+  private dialogRef: MatDialogRef<ModalEditProductComponent>,
+  private authService: AuthenticationService,
   ){
     this.productId = data.productId
+
+    const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
+    this.userId = decodeToken.employeeId
   }
 
   ngOnInit() {
@@ -66,6 +73,13 @@ export class ModalEditProductComponent implements OnInit{
     return this.productForm.get('quantity')!
   }
 
+  ModificProductById(userId: string, form: FormGroup): ModificProduct{
+    return {
+      UserId: this.userId,
+      Product: this.FormProduct(form)
+    }
+  }
+
   FormProduct(form: FormGroup): Product {
     const converter = new ConvertCurrency();
     return {
@@ -90,12 +104,15 @@ export class ModalEditProductComponent implements OnInit{
    if (this.productForm.invalid) {
       return;
     }
-    const updateProduct: Product = this.FormProduct(this.productForm)
+    const updateProduct: ModificProduct = this.ModificProductById(this.userId,this.productForm)
+    console.log(updateProduct)
     this.estoqueService.updateUser(updateProduct).subscribe((response) =>{
+      console.log(response)
       this.FecharModal();
       this.messagesSucessService.add("Produto alterado com sucesso")
       this.router.navigate(['/estoque'])
     },(error)=>{
+      console.log(updateProduct)
       this.FecharModal();
       this.messagesErrorService.add("Ocorreu erro ao alterar o produto " + error.error)
       this.router.navigate(['/estoque'])

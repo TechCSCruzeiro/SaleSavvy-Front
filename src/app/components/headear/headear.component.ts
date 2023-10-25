@@ -28,7 +28,8 @@ export class HeadearComponent{
     iconRegistry.addSvgIconLiteral('icon-user', sanitizer.bypassSecurityTrustHtml(IconUser));
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
-    this.nome = decodeToken.Name
+    console.log(decodeToken)
+    this.nome = decodeToken.name
   }
 
   deslogar () {

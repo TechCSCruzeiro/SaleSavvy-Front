@@ -7,6 +7,7 @@ interface Transaction {
   item: string;
   cost: number;
   quantidade: number;
+  quantidadeSequence: {};
 }
 
 @Component({
@@ -16,28 +17,27 @@ interface Transaction {
 })
 
 export class ProductCardComponent {
-  selected = "padrao"
+  selected: number[] = []
   
   displayedColumns = ['description', 'quantity', 'price','valuetotal','actions' ];
   transactions: Transaction[] = [
-    {item: 'Beach ball', cost: 4, quantidade: 25},
-    {item: 'Frisbee', cost: 2,quantidade: 15},
-    {item: 'Towel', cost: 5,quantidade: 55},
-    {item: 'Sunscreen', cost: 4,quantidade: 95},
-    {item: 'Cooler', cost: 25,quantidade: 15},
-    {item: 'Swim suit', cost: 15,quantidade: 5},
+    {item: 'Beach ball', cost: 4, quantidade: 25, quantidadeSequence: Array.from({ length: 25 }, (_, index) => index + 1) },
+    {item: 'Frisbee', cost: 2,quantidade: 15, quantidadeSequence: Array.from({ length: 15 }, (_, index) => index + 1) },
+    {item: 'Towel', cost: 5,quantidade: 55, quantidadeSequence: Array.from({ length: 55 }, (_, index) => index + 1) },
+    {item: 'Sunscreen', cost: 4,quantidade: 95, quantidadeSequence: Array.from({ length: 95 }, (_, index) => index + 1) },
+    {item: 'Cooler', cost: 25,quantidade: 15, quantidadeSequence: Array.from({ length: 15 }, (_, index) => index + 1) },
+    {item: 'Swim suit', cost: 15,quantidade: 5, quantidadeSequence: Array.from({ length: 5 }, (_, index) => index + 1) },
   ];
 
   constructor (public dialog: MatDialog){
-    
+    this.transactions.forEach(transaction => {
+      this.selected.push(1);
+    });
   }
+  
   /** Gets the total cost of all transactions. */
   getTotalCost() {
     return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
-  }
-
-  generateNumberList(product: Transaction): number[] {
-    return Array.from({ length: product.quantidade }, (_, index) => index + 1);
   }
 
   ModalAddProduct() {

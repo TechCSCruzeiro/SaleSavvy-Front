@@ -6,4 +6,5 @@ export interface Product {
     Price: number;
     Quantity: number;
     CreationDate?: Date;
+    QuantityDisplay?: number[];
 }
