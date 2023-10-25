@@ -29,7 +29,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="addToCart(row.id)"></mat-row>
       </mat-table>
     </mat-card-content>
   </mat-card>

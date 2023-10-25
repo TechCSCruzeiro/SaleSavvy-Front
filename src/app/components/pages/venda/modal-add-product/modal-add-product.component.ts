@@ -1,9 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/Models/Product';
 import { AuthenticationService } from 'src/app/service/auth.service';
 import { EstoqueService } from 'src/app/service/estoque.service';
+import { ExportProductCartService } from 'src/app/service/export-productCart.Service';
+
 
 const productData: Product[] = [];
 
@@ -13,16 +15,22 @@ const productData: Product[] = [];
   styleUrls: ['./modal-add-product.component.css']
 })
 export class ModalAddProductComponent implements OnInit {
+
+  @Output() eventAddProduct = new EventEmitter<string>()
+
   displayedColumns: string[] = ['name','description','price','quantity'];
   //dataSource = ELEMENT_DATA;
   dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>([]);
-
+  selectedProduct!: Product;
   UserId: string = ''
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
   private dialogRef: MatDialogRef<ModalAddProductComponent>,
   private estoqueService: EstoqueService,
-  private authService: AuthenticationService,)
+  private authService: AuthenticationService,
+  private exportProductCartService: ExportProductCartService,
+
+  )
   { 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.UserId = decodeToken.employeeId
@@ -47,8 +55,10 @@ export class ModalAddProductComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  addToCart(product: Product){
-    this
+  addToCart(id: string){
+    this.exportProductCartService.enviarMensagem(id)
   }
+
+
 
 }
