@@ -7,8 +7,6 @@ import { EstoqueService } from 'src/app/service/estoque.service';
 import { ExportProductCartService } from 'src/app/service/export-productCart.Service';
 
 
-const productData: Product[] = [];
-
 @Component({
   selector: 'app-modal-add-product',
   templateUrl: './modal-add-product.component.html',
@@ -29,7 +27,6 @@ export class ModalAddProductComponent implements OnInit {
   private estoqueService: EstoqueService,
   private authService: AuthenticationService,
   private exportProductCartService: ExportProductCartService,
-
   )
   { 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
@@ -45,9 +42,13 @@ export class ModalAddProductComponent implements OnInit {
         console.log("ERRO AO LISTAR PRODUTOS: ")
       }
       
-    } catch (err) {
-
+    } catch (error) {
+      console.log("ERRO AO CARREGAR OS PRODUTOS: ", error)
     }
+  }
+
+  closeModal(){
+    this.dialogRef.close();
   }
 
   applyFilter(event: Event) {
@@ -57,8 +58,6 @@ export class ModalAddProductComponent implements OnInit {
 
   addToCart(id: string){
     this.exportProductCartService.enviarMensagem(id)
+    this.dialogRef.close();
   }
-
-
-
 }

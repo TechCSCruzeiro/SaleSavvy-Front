@@ -1,7 +1,8 @@
 <div class="modal-content">
   <mat-card>
+    
     <mat-card-content>
-
+      <h1>Lista de Produtos</h1>
       <mat-form-field>
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monitor" #input>
@@ -9,28 +10,30 @@
 
       <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Name </mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="description">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Descrição </mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="price">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Preço </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> R$ {{element.price}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> Quantidade </mat-header-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Quantidade </mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="addToCart(row.id)"></mat-row>
       </mat-table>
+      <div class="button-close"><button mat-stroked-button color="warn"class="element-button" (click)="closeModal()">Fechar</button></div>
     </mat-card-content>
+    
   </mat-card>
 </div>
