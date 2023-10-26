@@ -66,7 +66,7 @@
                         <div class="text-danger ms-2 mt-1" *ngIf="errorCEP">
                             <p>{{errorCEP}}</p>
                         </div>
-                        
+
                     </div>
                     <div class="buttoncep">
                         <button type="button" (click)="SearchCEP()" mat-raised-button class="botao-nav">
@@ -139,41 +139,6 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="disabled == false">
-        <mat-card-content class="cad">
-            <div class="info">
-                <div class="">
-                    <p>Nome: Rikelmi Alves </p>
-                </div>
-                <div class="inputs">
-                    <p>Email: Rikelme.sivla@gmail.com</p>
-                </div>
-                <div class="inputs">
-                    <p>Telefone: (11)98931-2399</p>
-                </div>
-            </div>
-            <div class="endereco">
-                <div>
-                    <p>Endereço: Rua Glycerio Almeida</p>
-                </div>
-
-                <div class="inputs">
-                    <p>CEP: 04433-020</p>
-                </div>
-
-                <div class="inputs">
-                    <p>Bairro: JD.Itapura</p>
-                </div>
-            </div>
-            <div class="endereco2">
-                <div>
-                    <p>Cidade: São Paulo</p>
-                </div>
-                <div class="inputs">
-                    <p>Estado: SP</p>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+    <app-view-client *ngIf="disabled == false"></app-view-client>
     <app-product-card></app-product-card>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Product } from 'src/app/Models/Product';
 import { AuthenticationService } from 'src/app/service/auth.service';
 import { EstoqueService } from 'src/app/service/estoque.service';
@@ -27,6 +28,7 @@ export class ModalAddProductComponent implements OnInit {
   private estoqueService: EstoqueService,
   private authService: AuthenticationService,
   private exportProductCartService: ExportProductCartService,
+  private spinner: NgxSpinnerService,
   )
   { 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
@@ -34,6 +36,7 @@ export class ModalAddProductComponent implements OnInit {
   }
 
    async ngOnInit(){
+    this.spinner.show();
     try {
       const products = await this.estoqueService.getProduts(this.UserId).toPromise();
       if(products){
@@ -44,6 +47,8 @@ export class ModalAddProductComponent implements OnInit {
       
     } catch (error) {
       console.log("ERRO AO CARREGAR OS PRODUTOS: ", error)
+    } finally {
+      this.spinner.hide()
     }
   }
 

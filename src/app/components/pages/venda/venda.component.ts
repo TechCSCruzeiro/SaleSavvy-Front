@@ -14,7 +14,7 @@ import { VendaService } from 'src/app/service/venda.service';
   styleUrls: ['./venda.component.css']
 })
 export class VendaComponent implements OnInit {
-  disabled = true;
+  disabled = false;
   clienteForm!: FormGroup
   addressForm!: Address
   errorCEP!: string

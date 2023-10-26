@@ -1,0 +1,27 @@
+.mat-mdc-table {
+    width: 100%;
+    max-height: 50vh; /* Use vh para que a altura máxima seja relativa à altura da janela de visualização */
+    min-width: 200px;
+    overflow: auto;
+}
+
+.mat-mdc-form-field {
+    font-size: 1rem; /* Use rem para que o tamanho da fonte seja relativo ao tamanho da fonte base */
+    width: 100%;
+}
+
+/* Use uma media query para alterar o max-height em telas menores */
+@media (max-width: 600px) {
+    .mat-mdc-table {
+        max-height: 30vh;
+    }
+}
+
+.button-close{
+    margin-top: 20px;
+    text-align: right;
+}
+
+.element-button{
+    width: 15%;
+}

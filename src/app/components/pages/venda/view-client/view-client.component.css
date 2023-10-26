@@ -1,0 +1,29 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.inner-card {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.info, .endereco, .endereco2 {
+    display: flex;
+    justify-content: flex-start;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.item {
+    margin-right: 20px;
+}
+
+.mat-divider {
+    margin: 15px 0;
+}

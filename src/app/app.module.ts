@@ -60,7 +60,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { ProductCardComponent } from './components/pages/venda/product-card/product-card.component';
 import { ModalAddProductComponent } from './components/pages/venda/modal-add-product/modal-add-product.component';
 import {MatRippleModule} from '@angular/material/core';
-
+import { ViewClientComponent } from './components/pages/venda/view-client/view-client.component';
+import { ModalLocateClientComponent } from './components/pages/venda/view-client/modal-locate-client/modal-locate-client.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -83,6 +86,8 @@ import {MatRippleModule} from '@angular/material/core';
     ModalRemoveProductComponent,
     ProductCardComponent,
     ModalAddProductComponent,
+    ViewClientComponent,
+    ModalLocateClientComponent,
 
   ],
   imports: [
@@ -120,6 +125,8 @@ import {MatRippleModule} from '@angular/material/core';
     MatCheckboxModule,
     MatSelectModule,
     MatRippleModule,
+    NgxSpinnerModule,
+    MatProgressSpinnerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

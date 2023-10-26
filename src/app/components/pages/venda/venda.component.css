@@ -1,18 +1,3 @@
-.info{
-    display: flex;
-    justify-content: flex-start;
-}
-
-.endereco{
-    display: flex;
-    margin-top: 15px;
-}
-
-.endereco2{
-    display: flex;
-    margin-top: 15px;
-}
-
 .containerline1{
     display: flex;
 }
