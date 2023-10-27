@@ -16,13 +16,15 @@ import { Usuario } from 'src/app/Models/Usuario';
 import { RemoveUserComponent } from './Modal/remove-user.component';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerModule } from "ngx-spinner";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatIconModule, MatButtonToggleModule, FormsModule, NgIf, MatDialogModule]
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatIconModule, MatButtonToggleModule, FormsModule, NgIf, MatDialogModule,MatProgressSpinnerModule,NgxSpinnerModule]
 })
 export class TableOverviewExample implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'acoes'];

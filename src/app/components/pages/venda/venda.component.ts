@@ -6,6 +6,8 @@ import { AuthenticationService } from 'src/app/service/auth.service';
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
 import { MessagesSuccessService } from 'src/app/service/messages-success.service';
 import { VendaService } from 'src/app/service/venda.service';
+import { Subject, takeUntil } from 'rxjs';
+import { ImportClientSaleService } from 'src/app/service/import-clientSale.service';
 
 
 @Component({
@@ -19,19 +21,28 @@ export class VendaComponent implements OnInit {
   addressForm!: Address
   errorCEP!: string
   UserId!: string
+  client!:Client
+  private destroy$ = new Subject<void>();
 
   constructor(
     private vendaService: VendaService,
     private renderer: Renderer2,
     public messagesSucessService: MessagesSuccessService,
     public messagesErrorService: MessagesErrorService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private importClientSaleService: ImportClientSaleService,
   ) {
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.UserId = decodeToken.employeeId
    }
 
   ngOnInit(): void {
+    this.importClientSaleService.currentClient.pipe(takeUntil(this.destroy$)).subscribe(client => {
+      if (client) {
+        this.client = client
+      }
+    });
+
     this.clienteForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(14)],),

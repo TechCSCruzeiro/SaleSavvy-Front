@@ -64,6 +64,7 @@ import { ViewClientComponent } from './components/pages/venda/view-client/view-c
 import { ModalLocateClientComponent } from './components/pages/venda/view-client/modal-locate-client/modal-locate-client.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PaymentComponent } from './components/pages/venda/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ModalAddProductComponent,
     ViewClientComponent,
     ModalLocateClientComponent,
+    PaymentComponent,
 
   ],
   imports: [

@@ -62,7 +62,7 @@ export class ModalAddProductComponent implements OnInit {
   }
 
   addToCart(id: string){
-    this.exportProductCartService.enviarMensagem(id)
+    this.exportProductCartService.sendGuidProduct(id)
     this.dialogRef.close();
   }
 }

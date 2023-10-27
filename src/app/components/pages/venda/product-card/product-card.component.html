@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <div>
-      <button mat-raised-button color="primary" (click)="ModalAddProduct()">Adicionar Produto</button>
+      <button mat-stroked-button color="primary" (click)="ModalAddProduct()">Adicionar Produto</button>
     </div>
     <section class="example-container mat-elevation-z8" tabindex="0">
       <table mat-table [dataSource]="transactionsDataSource">
@@ -57,3 +57,4 @@
     </section>
   </mat-card-content>
 </mat-card>
+<app-payment></app-payment>

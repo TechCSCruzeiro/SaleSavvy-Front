@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { Product } from '../Models/Product';
 
 @Injectable({
     providedIn: 'root'
@@ -7,10 +8,17 @@ import { Subject } from 'rxjs';
 
 export class ExportProductCartService {
     private idProduct = new Subject<string>();
-    mensagem$ = this.idProduct.asObservable();
+    idProduct$ = this.idProduct.asObservable();
 
-    enviarMensagem(mensagem: string){
+    private productSource = new BehaviorSubject<Product[] | null>(null);
+    currentProduct = this.productSource.asObservable();
+
+    sendGuidProduct(mensagem: string){
         this.idProduct.next(mensagem)
     }
+
+    changeProduct(product: Product[]) {
+        this.productSource.next(product);
+      }
 
 }

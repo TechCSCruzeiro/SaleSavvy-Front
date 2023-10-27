@@ -1,16 +1,16 @@
-<mat-card class="card">
+<mat-card class="card" >
     <mat-card-content class="card-content">
         <button mat-stroked-button color="primary" (click)="ModalAddClient()">Localizar Cliente</button>
         <div class="viewclient">
-            <mat-card class="inner-card">
+            <mat-card class="inner-card" *ngIf="client">
                 <mat-card-header>
                     <mat-card-title>Informações do Cliente</mat-card-title>
                 </mat-card-header>
                 <mat-divider></mat-divider>
-                <mat-card-content>
+                <mat-card-content >
                     <div class="info">
                         <div class="item">
-                            <p><strong>Nome:</strong> Rikelmi Alves </p>
+                            <p><strong>Nome:</strong> {{client.Name}} </p>
                         </div>
                         <div class="item">
                             <p><strong>Email:</strong> Rikelme.sivla@gmail.com</p>

@@ -8,6 +8,7 @@ import { EstoqueService } from 'src/app/service/estoque.service';
 import { Product } from 'src/app/Models/Product';
 import { MessagesSuccessService } from 'src/app/service/messages-success.service';
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
+import { CheckoutService } from 'src/app/service/checkout.service';
 interface Transaction {
   item: string;
   cost: number;
@@ -34,8 +35,9 @@ export class ProductCardComponent {
     private exportProductCartService: ExportProductCartService,
     private estoqueService: EstoqueService,
     private cd: ChangeDetectorRef,
-    public messagesSucessService: MessagesSuccessService, 
-  public messagesErrorService: MessagesErrorService,
+    public messagesSucessService: MessagesSuccessService,
+    public messagesErrorService: MessagesErrorService,
+    private checkoutService: CheckoutService,
   ) {
     this.transactions.forEach(transaction => {
       this.selected.push(1);
@@ -44,11 +46,11 @@ export class ProductCardComponent {
   ngOnInit() {
     this.transactionsDataSource = new MatTableDataSource<Product>(this.transactions);
     this.transactionsDataSource.connect();
-    this.exportProductCartService.mensagem$.subscribe((mensagem) => {
-      if (typeof mensagem == undefined || mensagem == null) {
+    this.exportProductCartService.idProduct$.subscribe((idProduct) => {
+      if (typeof idProduct == undefined || idProduct == null) {
         console.log("Produto não localizado")
       } else {
-        this.estoqueService.getUserById(mensagem).subscribe((product: any) => {
+        this.estoqueService.getUserById(idProduct).subscribe((product: any) => {
           this.productAdded = {
             Id: product.id,
             Name: product.name,
@@ -58,6 +60,7 @@ export class ProductCardComponent {
             QuantityDisplay: Array.from({ length: product.quantity }, (_, index) => index + 1)
           }
           this.AddProduct(this.productAdded!)
+          this.checkoutService.changeProduct(this.transactions)
         })
 
       }
@@ -72,6 +75,9 @@ export class ProductCardComponent {
     return totalValue;
   }
 
+  sendListProduct() { //Enviando Array para o component Venda
+    this.exportProductCartService.changeProduct(this.transactions);
+  }
 
   ModalAddProduct() {
     const dialogRef = this.dialog.open(ModalAddProductComponent, {
