@@ -15,7 +15,7 @@ import { EditUserComponent } from './Modal/edit-user.component';
 import { Usuario } from 'src/app/Models/Usuario';
 import { RemoveUserComponent } from './Modal/remove-user.component';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-list',
@@ -32,19 +32,26 @@ export class TableOverviewExample implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private usuarioService: UsuarioService, public dialog: MatDialog, private router: Router) {
+  constructor(
+    private usuarioService: UsuarioService,
+    public dialog: MatDialog,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+  ) {
     this.dataSource = new MatTableDataSource();
   }
 
 
 
   ngAfterViewInit() {
+    this.spinner.show();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
     this.usuarioService.getUsers().subscribe(users => {
       this.dataSource.data = users;
     })
+    this.spinner.hide()
   }
 
   applyFilter(event: Event) {
@@ -66,8 +73,8 @@ export class TableOverviewExample implements AfterViewInit {
   }
   openDialogRemove(userId: string, nameUser: string) {
     const dialogRef = this.dialog.open(RemoveUserComponent, {
-      width: '400px', 
-      data: {userId: userId, nameUser: nameUser}
+      width: '400px',
+      data: { userId: userId, nameUser: nameUser }
     })
 
   }

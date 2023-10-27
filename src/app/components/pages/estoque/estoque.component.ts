@@ -8,7 +8,7 @@ import { ModalEditProductComponent } from './modal-edit-product/modal-edit-produ
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ModalRemoveProductComponent } from './modal-remove-product/modal-remove-product.component';
 import { AuthenticationService } from 'src/app/service/auth.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-estoque',
@@ -24,7 +24,11 @@ export class EstoqueComponent implements AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private estoqueService: EstoqueService, public dialog: MatDialog,private authService: AuthenticationService) {
+  constructor(private estoqueService: EstoqueService,
+    public dialog: MatDialog,
+    private authService: AuthenticationService,
+    private spinner: NgxSpinnerService
+    ){
     this.dataSource = new MatTableDataSource();
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
@@ -32,6 +36,7 @@ export class EstoqueComponent implements AfterViewInit{
   }
 
   async ngAfterViewInit() {
+    this.spinner.show();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -45,8 +50,7 @@ export class EstoqueComponent implements AfterViewInit{
     } catch (err) {
       console.log("Erro ao obter os produtos", err);
     }
-    console.log(this.dataSource.data)
-
+    this.spinner.hide()
   }
 
   applyFilter(event: Event) {

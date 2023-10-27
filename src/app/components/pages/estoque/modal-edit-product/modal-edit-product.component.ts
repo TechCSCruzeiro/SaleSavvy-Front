@@ -9,6 +9,7 @@ import { Product } from 'src/app/Models/Product';
 import { ConvertCurrency } from 'src/app/function/ConvertCurrency';
 import { AuthenticationService } from 'src/app/service/auth.service';
 import { ModificProduct } from 'src/app/Models/ModificProduct';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-modal-edit-product',
@@ -29,6 +30,7 @@ export class ModalEditProductComponent implements OnInit{
   private router: Router,
   private dialogRef: MatDialogRef<ModalEditProductComponent>,
   private authService: AuthenticationService,
+  private spinner: NgxSpinnerService,
   ){
     this.productId = data.productId
 
@@ -37,7 +39,7 @@ export class ModalEditProductComponent implements OnInit{
   }
 
   ngOnInit() {
-
+    this.spinner.show();
     this.estoqueService.getUserById(this.productId)
       .subscribe(
         (data: any) => {
@@ -52,6 +54,7 @@ export class ModalEditProductComponent implements OnInit{
           console.error('Ocorreu um erro ao buscar o produto:', error);
         }
       );
+      this.spinner.hide()
       this.productForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
@@ -81,6 +84,7 @@ export class ModalEditProductComponent implements OnInit{
   }
 
   FormProduct(form: FormGroup): Product {
+    console.log("VALOR Antes",form.get('price'))
     const converter = new ConvertCurrency();
     return {
       Id: this.productId!,
