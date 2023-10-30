@@ -1,0 +1,12 @@
+.base-report{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.button-report{
+}
+
+.mat-select{
+    min-width: 300px;
+}

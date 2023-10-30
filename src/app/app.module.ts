@@ -2,9 +2,10 @@
 import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import {NgIf} from "@angular/common";
+import {NgIf, JsonPipe} from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { VendaComponent } from './components/pages/venda/venda.component';
@@ -65,6 +66,10 @@ import { ModalLocateClientComponent } from './components/pages/venda/view-client
 import { NgxSpinnerModule } from "ngx-spinner";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PaymentComponent } from './components/pages/venda/payment/payment.component';
+import { RelatorioComponent } from './components/pages/relatorio/relatorio.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -90,6 +95,7 @@ import { PaymentComponent } from './components/pages/venda/payment/payment.compo
     ViewClientComponent,
     ModalLocateClientComponent,
     PaymentComponent,
+    RelatorioComponent,
 
   ],
   imports: [
@@ -129,6 +135,10 @@ import { PaymentComponent } from './components/pages/venda/payment/payment.compo
     MatRippleModule,
     NgxSpinnerModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    JsonPipe,
+    MatNativeDateModule,
+    MatStepperModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -144,7 +154,8 @@ import { PaymentComponent } from './components/pages/venda/payment/payment.compo
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })

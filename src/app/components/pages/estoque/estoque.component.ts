@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -27,16 +27,20 @@ export class EstoqueComponent implements AfterViewInit{
   constructor(private estoqueService: EstoqueService,
     public dialog: MatDialog,
     private authService: AuthenticationService,
-    private spinner: NgxSpinnerService
     ){
     this.dataSource = new MatTableDataSource();
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.userId = decodeToken.employeeId
+
+    console.log("Acessou a pagina estoque")
+  }
+
+  ngOnInit(){
+    console.log('AAAAAAAAAAAA')
   }
 
   async ngAfterViewInit() {
-    this.spinner.show();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -50,7 +54,6 @@ export class EstoqueComponent implements AfterViewInit{
     } catch (err) {
       console.log("Erro ao obter os produtos", err);
     }
-    this.spinner.hide()
   }
 
   applyFilter(event: Event) {

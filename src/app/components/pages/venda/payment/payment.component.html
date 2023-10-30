@@ -12,7 +12,6 @@
                     </mat-select>
                     <mat-error *ngIf="paymentControl.hasError('required')">Por favor escolha uma forma de
                         pagamento</mat-error>
-                    <mat-hint>{{paymentControl.value?.viewValue}}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field *ngIf="optionParcel" class="form-field">
@@ -22,7 +21,7 @@
                     </mat-select>
                     <mat-error *ngIf="parcelControl.hasError('required')">Por favor escolha uma forma de
                         pagamento</mat-error>
-                    <mat-hint>{{getParcelValue()}}</mat-hint>
+                    <mat-hint>Valor Parcela: {{getParcelValue() | currency:'BRL'}}</mat-hint>
                 </mat-form-field>
             </div>
             <button mat-flat-button color="primary" (click)="finalizePurchase()">Finalizar Pedido</button>

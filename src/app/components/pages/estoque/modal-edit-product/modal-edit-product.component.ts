@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild  } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,10 +18,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ModalEditProductComponent implements OnInit{
 
+  @ViewChild('minhaTabela') minhaTabela: any;
+
   productId!:string;
   product!: Product;
   productForm!: FormGroup
   userId: string = ''
+  formattedPrice!: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
   private estoqueService: EstoqueService,
@@ -49,6 +52,7 @@ export class ModalEditProductComponent implements OnInit{
             Price: data.price || 0,
             Quantity: data.quantity || 0,
           };
+          this.formatProductPrice();
         },
         error => {
           console.error('Ocorreu um erro ao buscar o produto:', error);
@@ -84,19 +88,33 @@ export class ModalEditProductComponent implements OnInit{
   }
 
   FormProduct(form: FormGroup): Product {
-    console.log("VALOR Antes",form.get('price'))
     const converter = new ConvertCurrency();
+    console.log(typeof form.get('price')?.value === 'number' ? form.get('price')!.value : converter.formatCurrencyToNumber(form.get('price')!.value))
     return {
       Id: this.productId!,
       Name: form.get('name')!.value,
       Description: form.get('description')!.value,
-      Price: converter.formatCurrencyToNumber(form.get('price')!.value),
+      Price: typeof form.get('price')?.value === 'number' ? form.get('price')!.value : converter.formatCurrencyToNumber(form.get('price')!.value),
       Quantity: Number(form.get('quantity')!.value),
     }
+    
   }
 
   FecharModal(){
     this.dialogRef.close();
+  }
+
+  formatProductPrice() {
+    if (this.product && this.product.Price) {
+      const numberValue = parseFloat(this.product.Price.toString()) / 100;
+      this.formattedPrice = numberValue.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: "BRL",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      this.productForm.get('price')!.setValue(this.formattedPrice, {emitEvent: false});
+    }
   }
 
   onInputChange(event: any) {
@@ -111,10 +129,11 @@ export class ModalEditProductComponent implements OnInit{
     const updateProduct: ModificProduct = this.ModificProductById(this.userId,this.productForm)
     console.log(updateProduct)
     this.estoqueService.updateUser(updateProduct).subscribe((response) =>{
-      console.log(response)
       this.FecharModal();
       this.messagesSucessService.add("Produto alterado com sucesso")
-      this.router.navigate(['/estoque'])
+      window.location.reload();
+      //this.router.navigate(['/estoque'])
+      
     },(error)=>{
       console.log(updateProduct)
       this.FecharModal();

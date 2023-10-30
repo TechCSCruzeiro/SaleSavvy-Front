@@ -67,6 +67,12 @@ export class ProductCardComponent {
     })
   }
 
+  getSelectedValues() {
+    for (let i = 0; i < this.selected.length; i++) {
+      this.transactions[i].Quantity = this.selected[i];
+    }
+  }
+
   calculateTotalValue() {
     let totalValue = 0;
     for (let i = 0; i < this.transactions.length; i++) {
@@ -86,7 +92,6 @@ export class ProductCardComponent {
   }
 
   removeProduct(index: number) {
-    console.log(">>>> ", index)
     this.transactions.splice(index, 1);
     this.transactionsDataSource = new MatTableDataSource<Product>(this.transactions);
     this.cd.detectChanges();

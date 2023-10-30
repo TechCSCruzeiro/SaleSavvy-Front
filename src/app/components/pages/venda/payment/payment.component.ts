@@ -1,6 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { takeUntil,Subject } from 'rxjs';
+import { takeUntil, Subject } from 'rxjs';
 import { Product } from 'src/app/Models/Product';
 import { CheckoutService } from 'src/app/service/checkout.service';
 
@@ -27,13 +27,13 @@ export class PaymentComponent {
 
   constructor(
     private checkoutService: CheckoutService,
-  ){
+  ) {
 
   }
 
   viewsPayments: Payment[] = [
     { value: 'pix', viewValue: 'Pix' },
-    { value: 'credito', viewValue: 'Cartão de Credito'},
+    { value: 'credito', viewValue: 'Cartão de Credito' },
     { value: 'debito', viewValue: 'Cartão de Debito' },
   ];
 
@@ -47,11 +47,11 @@ export class PaymentComponent {
 
   getParcelValue(): number | null {
     if (this.products && this.parcelControl.value) {
-        const totalValue = this.products.reduce((total, product) => total + product.Price, 0);
-        return totalValue / this.parcelControl.value;
+      const totalValue = this.products.reduce((total, product) => total + (product.Price * product.Quantity), 0);
+      return totalValue / this.parcelControl.value;
     }
     return null;
-}
+  }
 
   verifyPayment() {
     if (this.paymentControl.value?.value == 'credito') {
@@ -78,7 +78,7 @@ export class PaymentComponent {
       }
 
       console.log(this.payment)
-      console.log("Produtos> > ",this.products)
+      console.log("Produtos> > ", this.products)
     }
 
   }

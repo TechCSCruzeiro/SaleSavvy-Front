@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { FormControl, FormsModule, Validators, FormGroupDirective, NgForm,
+  ReactiveFormsModule  } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { EditUserComponent } from './Modal/edit-user.component';
@@ -18,18 +20,23 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatIconModule, MatButtonToggleModule, FormsModule, NgIf, MatDialogModule,MatProgressSpinnerModule,NgxSpinnerModule]
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatIconModule, MatButtonToggleModule, FormsModule, NgIf, MatDialogModule,MatProgressSpinnerModule,NgxSpinnerModule, MatMenuModule,MatSelectModule,ReactiveFormsModule, MatRadioModule]
 })
 export class TableOverviewExample implements AfterViewInit {
+  
+
   displayedColumns: string[] = ['id', 'name', 'email', 'acoes'];
   dataSource: MatTableDataSource<Usuario>;
   userId!: string;
+  permission: string = "true"
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,8 +49,6 @@ export class TableOverviewExample implements AfterViewInit {
   ) {
     this.dataSource = new MatTableDataSource();
   }
-
-
 
   ngAfterViewInit() {
     this.spinner.show();
@@ -65,11 +70,15 @@ export class TableOverviewExample implements AfterViewInit {
     }
   }
 
+  modifyPermission(permission: any, userID: string){
+    console.log("Premissão",permission.value, "ID do USUARIO: ", userID)
+  }
+
   clickedRows = new Set<any>();
 
   openDialog(userId: string) {
     const dialogRef = this.dialog.open(EditUserComponent, {
-      width: '400px', // Defina a largura do modal conforme necessário
+      width: '400px',
       data: { userId: userId },
     })
   }
