@@ -10,6 +10,7 @@ import { LoginComponent } from "./components/pages/login/login.component";
 import { AuthGuard } from "./service/auth.guard";
 import { AddProductComponent } from "./components/pages/estoque/addProduct/add-product.component";
 import { RelatorioComponent } from "./components/pages/relatorio/relatorio.component";
+import { ClientComponent } from "./components/pages/client/client.component";
 
 const routes: Routes = [
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -18,7 +19,9 @@ const routes: Routes = [
     {path: 'estoque/cadastro', component: AddProductComponent, canActivate: [AuthGuard]},
     {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AuthGuard]},
     {path: 'usuario', component: TableOverviewExample, canActivate: [AuthGuard]},
+    {path: 'cliente', component: ClientComponent, canActivate: [AuthGuard]},
     {path: 'relatorio', component: RelatorioComponent, canActivate: [AuthGuard]},
+    
 ];
 
 @NgModule({

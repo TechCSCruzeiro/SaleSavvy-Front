@@ -43,3 +43,11 @@ h1 {
   display: block;
   margin: 15px 0;
 }
+
+.phone-column {
+  width: 10%;
+}
+
+.address-column {
+  width: 50%;
+}

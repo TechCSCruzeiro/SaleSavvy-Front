@@ -1,0 +1,66 @@
+<div class="modal-content">
+    <h2 mat-dialog-title>Editar Usuario</h2>
+    <hr>
+    <form (ngSubmit)="submit()" [formGroup]="clientForm" #formDir="ngForm">
+  
+      <mat-form-field class="inputs">
+        <mat-label>Nome: </mat-label>
+        <input matInput type="text" [(ngModel)]="client.Name" name="name" formControlName="name">
+        <button *ngIf="client.Name" matSuffix mat-icon-button aria-label="Clear" (click)="client.Name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
+          <p>Nome Invalido!</p>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>Email: </mat-label>
+        <input matInput type="email" [(ngModel)]="client.Email" name="email" formControlName="email">
+        <button *ngIf="client.Email" matSuffix mat-icon-button aria-label="Clear" (click)="client.Email=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>Phone: </mat-label>
+        <input matInput type="email" [(ngModel)]="client.Phone" name="phone" formControlName="phone">
+        <button *ngIf="client.Phone" matSuffix mat-icon-button aria-label="Clear" (click)="client.Email=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>CEP: </mat-label>
+        <input matInput type="email" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
+        <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Code=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>Endereço: </mat-label>
+        <input matInput type="text" [(ngModel)]="client.Address.Street" name="street" formControlName="street">
+        <button *ngIf="client.Address.Street" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Street=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>Numero: </mat-label>
+        <input matInput type="text" [(ngModel)]="client.Address.Number" name="number" formControlName="number">
+        <button *ngIf="client.Address.Number" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Number=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="inputs">
+        <mat-label>CEP: </mat-label>
+        <input matInput type="email" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
+        <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Code=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </form>
+</div>
