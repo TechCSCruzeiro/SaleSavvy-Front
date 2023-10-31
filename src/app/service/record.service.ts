@@ -15,6 +15,7 @@ import { Product } from '../Models/Product';
 export class RecordService{
     private apiUrlPostMovimentStock = 'https://localhost:7142/api/MovementRecords/record/movement/stock'
     private apiUrlPostStock = 'https://localhost:7142/api/MovementRecords/record/stock'
+    
     private apiUrlGetDownload = 'https://localhost:7142/api/MovementRecords/api/excel/download?fileId='
     
 

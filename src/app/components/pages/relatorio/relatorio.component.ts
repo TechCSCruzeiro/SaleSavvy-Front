@@ -45,40 +45,39 @@ export class RelatorioComponent {
     private _formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private recordService: RecordService,
-    public messagesSucessService: MessagesSuccessService, 
+    public messagesSucessService: MessagesSuccessService,
     public messagesErrorService: MessagesErrorService,
   ) {
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.UserId = decodeToken.employeeId
   }
 
-  routerRecord(){
-    if (this.relatorioControl.value){
+  routerRecord() {
+    if (this.relatorioControl.value) {
       const idRecord: any = this.relatorioControl.value
-      switch (idRecord){
-        case 1: 
-        return {
-          Router: 'getIdMovimentStock',
-          NameRecord: 'Relatorio Movimetação do Estoque'
-        }
-        
+      switch (idRecord) {
+        case 1:
+          return {
+            Router: 1,
+            NameRecord: 'Relatorio Movimetação do Estoque.xlsx'
+          }
+
         case 2:
           return {
-            Router: 'getIdStock',
-            NameRecord: 'Relatorio do Estoque'
+            Router: 2,
+            NameRecord: 'Relatorio do Estoque.xlsx'
           }
         default:
           console.log('Relatorio não encontrado')
           return
       }
-    }else {
+    } else {
       return
     }
-    
+
   }
 
-  convert(params: any):Record
-  {
+  convert(params: any): Record {
     const infoReport = {
       UserId: params.UserId,
       StartDate: params.StartDate,
@@ -87,11 +86,11 @@ export class RelatorioComponent {
     return infoReport
   }
 
-  convertReport(){
+  convertReport() {
     const paramsReport = {
       UserId: this.UserId,
       StartDate: this.range.value.start ? this.range.value.start.toISOString().split('T')[0] : null,
-    EndDate: this.range.value.end ? this.range.value.end.toISOString().split('T')[0] : null,
+      EndDate: this.range.value.end ? this.range.value.end.toISOString().split('T')[0] : null,
     }
     return this.convert(paramsReport)
   }
@@ -101,29 +100,50 @@ export class RelatorioComponent {
     const routerRecord = this.routerRecord()
     const params = this.convertReport()
     console.log(params)
-    if(!routerRecord || !params.StartDate || !params.EndDate || this.range.invalid){
+    if (!routerRecord || !params.StartDate || !params.EndDate || this.range.invalid) {
       this.messagesErrorService.add('Erro! Verifique os campos selecionados ')
       return
     }
-    
-     this.recordService.getIdMovimentStock(params).subscribe((response) => {
-       console.log("Deu Certo: ", response)
-       this.recordService.getdownloadRecord(response).subscribe(data => {
-         const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-         const url = window.URL.createObjectURL(blob);
-      
-         const link = document.createElement('a');
-         link.href = url;
-         link.download = 'arquivo.xlsx'; // substitua por seu nome de arquivo desejado
-         link.click();
-      
-         window.URL.revokeObjectURL(url);
-       })
-      
-     }, (error) =>{
-       console.log("Deu ERRO: ", error)
-     })
 
+    if (routerRecord.Router === 1) {
+      this.recordService.getIdMovimentStock(params).subscribe((response) => {
+        console.log("Deu Certo: ", response)
+        this.recordService.getdownloadRecord(response).subscribe(data => {
+          const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = routerRecord.NameRecord;
+          link.click();
+
+          window.URL.revokeObjectURL(url);
+        })
+
+      }, (erro) => {
+        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+      })
+    }
+
+    if (routerRecord.Router === 2) {
+      this.recordService.getIdStock(params).subscribe((response) => {
+        console.log("Deu Certo: ", response)
+        this.recordService.getdownloadRecord(response).subscribe(data => {
+          const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = routerRecord.NameRecord;
+          link.click();
+
+          window.URL.revokeObjectURL(url);
+        })
+
+      }, (erro) => {
+        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+      })
+    }
   }
 
 

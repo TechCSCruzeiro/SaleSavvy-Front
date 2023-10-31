@@ -9,7 +9,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { VendaComponent } from './components/pages/venda/venda.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HeadearComponent } from './components/headear/headear.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -75,7 +74,6 @@ import {MatStepperModule} from '@angular/material/stepper';
   declarations: [
     AppComponent,
     VendaComponent,
-    FooterComponent,
     HeadearComponent,
     EstoqueComponent,
     UsuarioComponent,
