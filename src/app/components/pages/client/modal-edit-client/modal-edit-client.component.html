@@ -2,65 +2,115 @@
     <h2 mat-dialog-title>Editar Usuario</h2>
     <hr>
     <form (ngSubmit)="submit()" [formGroup]="clientForm" #formDir="ngForm">
-  
-      <mat-form-field class="inputs">
-        <mat-label>Nome: </mat-label>
-        <input matInput type="text" [(ngModel)]="client.Name" name="name" formControlName="name">
-        <button *ngIf="client.Name" matSuffix mat-icon-button aria-label="Clear" (click)="client.Name=''">
-          <mat-icon>close</mat-icon>
-        </button>
-        <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
-          <p>Nome Invalido!</p>
-        </div>
-      </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>Email: </mat-label>
-        <input matInput type="email" [(ngModel)]="client.Email" name="email" formControlName="email">
-        <button *ngIf="client.Email" matSuffix mat-icon-button aria-label="Clear" (click)="client.Email=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>Nome: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Name" name="name" formControlName="name">
+            <button *ngIf="client.Name" matSuffix mat-icon-button aria-label="Clear" (click)="client.Name=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            <div class="text-danger ms-2 mt-1" *ngIf="name.invalid && formDir.submitted">
+                <p>Nome Invalido!</p>
+            </div>
+        </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>Phone: </mat-label>
-        <input matInput type="email" [(ngModel)]="client.Phone" name="phone" formControlName="phone">
-        <button *ngIf="client.Phone" matSuffix mat-icon-button aria-label="Clear" (click)="client.Email=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>Email: </mat-label>
+            <input matInput type="email" [(ngModel)]="client.Email" name="email" formControlName="email">
+            <button *ngIf="client.Email" matSuffix mat-icon-button aria-label="Clear" (click)="client.Email=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>CEP: </mat-label>
-        <input matInput type="email" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
-        <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Code=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>Phone: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Phone" name="phone" formControlName="phone">
+            <button *ngIf="client.Phone" matSuffix mat-icon-button aria-label="Clear" (click)="client.Phone=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>Endereço: </mat-label>
-        <input matInput type="text" [(ngModel)]="client.Address.Street" name="street" formControlName="street">
-        <button *ngIf="client.Address.Street" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Street=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>CEP: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
+            <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear"
+                (click)="client.Address.Code=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>Numero: </mat-label>
-        <input matInput type="text" [(ngModel)]="client.Address.Number" name="number" formControlName="number">
-        <button *ngIf="client.Address.Number" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Number=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>Endereço: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Address.Street" name="street" formControlName="street">
+            <button *ngIf="client.Address.Street" matSuffix mat-icon-button aria-label="Clear"
+                (click)="client.Address.Street=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
 
-      <mat-form-field class="inputs">
-        <mat-label>CEP: </mat-label>
-        <input matInput type="email" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
-        <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear" (click)="client.Address.Code=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field class="inputs">
+            <mat-label>Numero: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Address.Number" name="number" formControlName="number">
+            <button *ngIf="client.Address.Number" matSuffix mat-icon-button aria-label="Clear"
+                (click)="client.Address.Number=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
 
+        <mat-form-field class="inputs">
+            <mat-label>Bairro: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Address.District" name="district"
+                formControlName="district">
+            <button *ngIf="client.Address.District" matSuffix mat-icon-button aria-label="Clear"
+                (click)="client.Address.District=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field class="inputs">
+            <mat-label>Cidade: </mat-label>
+            <input matInput type="text" [(ngModel)]="client.Address.District" name="city" formControlName="city">
+            <button *ngIf="client.Address.City" matSuffix mat-icon-button aria-label="Clear"
+                (click)="client.Address.City=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field class="inputs">
+            <mat-label>Estado: </mat-label>
+            <mat-form-field>
+                <mat-label>UF</mat-label>
+                <select matNativeControl required id="uf" name="uf">
+                    <option value=""></option>
+                    <option value="ac">AC</option>
+                    <option value="al">AL</option>
+                    <option value="ap">AP</option>
+                    <option value="am">AM</option>
+                    <option value="ba">BA</option>
+                    <option value="ce">CE</option>
+                    <option value="df">DF</option>
+                    <option value="es">ES</option>
+                    <option value="go">GO</option>
+                    <option value="ma">MA</option>
+                    <option value="mt">MT</option>
+                    <option value="ms">MS</option>
+                    <option value="mg">MG</option>
+                    <option value="pa">PA</option>
+                    <option value="pb">PB</option>
+                    <option value="pr">PR</option>
+                    <option value="pe">PE</option>
+                    <option value="pi">PI</option>
+                    <option value="rj">RJ</option>
+                    <option value="rn">RN</option>
+                    <option value="rs">RS</option>
+                    <option value="ro">RO</option>
+                    <option value="rr">RR</option>
+                    <option value="sc">SC</option>
+                    <option value="sp">SP</option>
+                    <option value="se">SE</option>
+                    <option value="to">TO</option>
+                </select>
+            </mat-form-field>
+        </mat-form-field>
     </form>
 </div>

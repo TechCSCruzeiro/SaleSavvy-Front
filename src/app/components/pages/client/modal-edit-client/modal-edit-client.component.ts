@@ -13,7 +13,7 @@ import { MessagesSuccessService } from 'src/app/service/messages-success.service
   styleUrls: ['./modal-edit-client.component.css']
 })
 export class ModalEditClientComponent {
-  userId!:string;
+  clientId!:string;
   client!: Client;
   clientForm!: FormGroup
 
@@ -24,25 +24,26 @@ export class ModalEditClientComponent {
   private router: Router,
   private dialogRef: MatDialogRef<ModalEditClientComponent>
   ){
-    this.userId = data.userId
+    this.clientId = data.clientId
   }
 
   ngOnInit() {
-    this.clientService.getClientById(this.userId).subscribe(
+    this.clientService.getClientById(this.clientId).subscribe(
       (clients: any) => {
+        console.log(clients)
         this.client = {
-          Id: clients.Id || '',
-          Name: clients.Name || '',
-          Email: clients.Email || '',
-          Phone: clients.Phone || '',
-          UserID: clients.UserID || '',
+          Id: clients.id || '',
+          Name: clients.name || '',
+          Email: clients.email || '',
+          Phone: clients.phone || '',
+          UserID: clients.userID || '',
           Address: {
-            Code: clients.Address.Code || '',
-            State: clients.Address.State || '',
-            City: clients.Address.City || '',
-            District: clients.Address.District || '',
-            Street: clients.Address.Street || '',
-            Number: clients.Address.Number || '',
+            Code: clients.address.code || '',
+            State: clients.address.state || '',
+            City: clients.address.city || '',
+            District: clients.address.district || '',
+            Street: clients.address.street || '',
+            Number: clients.address.number || '',
           }
         };
     })
@@ -61,6 +62,30 @@ export class ModalEditClientComponent {
 
   get name() {
     return this.clientForm.get('name')!
+  }
+  get email() {
+    return this.clientForm.get('email')!
+  }
+  get phone() {
+    return this.clientForm.get('phone')!
+  }
+  get code() {
+    return this.clientForm.get('code')!
+  }
+  get state() {
+    return this.clientForm.get('state')!
+  }
+  get city() {
+    return this.clientForm.get('state')!
+  }
+  get district() {
+    return this.clientForm.get('district')!
+  }
+  get street() {
+    return this.clientForm.get('street')!
+  }
+  get number() {
+    return this.clientForm.get('number')!
   }
 
   submit(){}

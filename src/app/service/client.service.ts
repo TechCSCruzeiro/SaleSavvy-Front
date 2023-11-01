@@ -15,7 +15,7 @@ export class ClientService {
 
     private apiUrlDelete = 'Deletar'
     private apiUrlPut = 'Link Modificar'
-    private apiUrlGetById = ''
+    private apiUrlGetById = 'https://localhost:7142/api/Client/test'
 
     getClientById(clientId: string): Observable<Client>{
         return this.http.get<Client>(`${this.apiUrlGetById}/${clientId}`);
