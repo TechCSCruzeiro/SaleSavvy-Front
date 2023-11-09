@@ -72,6 +72,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { ClientComponent } from './components/pages/client/client.component';
 import { ModalRemoveClientComponent } from './components/pages/client/modal-remove-client/modal-remove-client.component';
 import { ModalEditClientComponent } from './components/pages/client/modal-edit-client/modal-edit-client.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,7 @@ import { ModalEditClientComponent } from './components/pages/client/modal-edit-c
     JsonPipe,
     MatNativeDateModule,
     MatStepperModule,
+    NgChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

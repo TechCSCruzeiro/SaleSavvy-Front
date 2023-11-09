@@ -23,6 +23,7 @@ const IconUser =
 export class HeadearComponent{
   showFiller = true;
   nome: string = ''
+  isAdmin: string = ''
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private authService: AuthenticationService) {
     iconRegistry.addSvgIconLiteral('icon-usuario', sanitizer.bypassSecurityTrustHtml(IconUsuario));
     iconRegistry.addSvgIconLiteral('icon-estoque', sanitizer.bypassSecurityTrustHtml(IconEstoque));
@@ -33,6 +34,7 @@ export class HeadearComponent{
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     console.log(decodeToken)
     this.nome = decodeToken.name
+    this.isAdmin = decodeToken.isAdm
   }
 
   deslogar () {

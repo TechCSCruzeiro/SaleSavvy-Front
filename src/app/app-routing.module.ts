@@ -11,14 +11,15 @@ import { AuthGuard } from "./service/auth.guard";
 import { AddProductComponent } from "./components/pages/estoque/addProduct/add-product.component";
 import { RelatorioComponent } from "./components/pages/relatorio/relatorio.component";
 import { ClientComponent } from "./components/pages/client/client.component";
+import { AdminGuard } from "./service/admin.guard";
 
 const routes: Routes = [
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'venda', component: VendaComponent, canActivate: [AuthGuard]},
     {path: 'estoque', component: EstoqueComponent, canActivate: [AuthGuard]},
     {path: 'estoque/cadastro', component: AddProductComponent, canActivate: [AuthGuard]},
-    {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AuthGuard]},
-    {path: 'usuario', component: TableOverviewExample, canActivate: [AuthGuard]},
+    {path: 'usuario/cadastro', component: UsuarioComponent, canActivate: [AdminGuard]},
+    {path: 'usuario', component: TableOverviewExample, canActivate: [AdminGuard]},
     {path: 'cliente', component: ClientComponent, canActivate: [AuthGuard]},
     {path: 'relatorio', component: RelatorioComponent, canActivate: [AuthGuard]},
     

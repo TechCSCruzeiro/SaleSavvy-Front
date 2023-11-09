@@ -18,6 +18,15 @@ export class AuthenticationService {
     return this.Authenticated;
   }
 
+  public isAdmin(): boolean {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken && decodedToken.isAdm === 'True';
+    }
+    return false;
+  }
+
   public login(token: string): void {
     localStorage.setItem('access-token', token);
     this.Authenticated = true;
