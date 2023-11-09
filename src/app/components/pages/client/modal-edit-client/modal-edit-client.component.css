@@ -1,0 +1,14 @@
+.modal-content {
+    text-align: center;
+    overflow: auto;
+}
+
+.inputs{
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form {
+    max-height: 70vh; /* 70% da altura da janela de visualização */
+    overflow-y: auto;
+  }

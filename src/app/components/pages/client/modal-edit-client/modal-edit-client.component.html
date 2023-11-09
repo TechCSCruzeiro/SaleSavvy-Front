@@ -23,7 +23,7 @@
         </mat-form-field>
 
         <mat-form-field class="inputs">
-            <mat-label>Phone: </mat-label>
+            <mat-label>Telefone: </mat-label>
             <input matInput type="text" [(ngModel)]="client.Phone" name="phone" formControlName="phone">
             <button *ngIf="client.Phone" matSuffix mat-icon-button aria-label="Clear" (click)="client.Phone=''">
                 <mat-icon>close</mat-icon>
@@ -32,7 +32,7 @@
 
         <mat-form-field class="inputs">
             <mat-label>CEP: </mat-label>
-            <input matInput type="text" [(ngModel)]="client.Address.Code" name="cep" formControlName="cep">
+            <input matInput type="text" [(ngModel)]="client.Address.Code" name="code" formControlName="code">
             <button *ngIf="client.Address.Code" matSuffix mat-icon-button aria-label="Clear"
                 (click)="client.Address.Code=''">
                 <mat-icon>close</mat-icon>
@@ -77,40 +77,41 @@
         </mat-form-field>
 
         <mat-form-field class="inputs">
-            <mat-label>Estado: </mat-label>
-            <mat-form-field>
-                <mat-label>UF</mat-label>
-                <select matNativeControl required id="uf" name="uf">
-                    <option value=""></option>
-                    <option value="ac">AC</option>
-                    <option value="al">AL</option>
-                    <option value="ap">AP</option>
-                    <option value="am">AM</option>
-                    <option value="ba">BA</option>
-                    <option value="ce">CE</option>
-                    <option value="df">DF</option>
-                    <option value="es">ES</option>
-                    <option value="go">GO</option>
-                    <option value="ma">MA</option>
-                    <option value="mt">MT</option>
-                    <option value="ms">MS</option>
-                    <option value="mg">MG</option>
-                    <option value="pa">PA</option>
-                    <option value="pb">PB</option>
-                    <option value="pr">PR</option>
-                    <option value="pe">PE</option>
-                    <option value="pi">PI</option>
-                    <option value="rj">RJ</option>
-                    <option value="rn">RN</option>
-                    <option value="rs">RS</option>
-                    <option value="ro">RO</option>
-                    <option value="rr">RR</option>
-                    <option value="sc">SC</option>
-                    <option value="sp">SP</option>
-                    <option value="se">SE</option>
-                    <option value="to">TO</option>
-                </select>
-            </mat-form-field>
+            <mat-label>UF</mat-label>
+            <select matNativeControl required id="state" name="state">
+                <option value=""></option>
+                <option value="ac">AC</option>
+                <option value="al">AL</option>
+                <option value="ap">AP</option>
+                <option value="am">AM</option>
+                <option value="ba">BA</option>
+                <option value="ce">CE</option>
+                <option value="df">DF</option>
+                <option value="es">ES</option>
+                <option value="go">GO</option>
+                <option value="ma">MA</option>
+                <option value="mt">MT</option>
+                <option value="ms">MS</option>
+                <option value="mg">MG</option>
+                <option value="pa">PA</option>
+                <option value="pb">PB</option>
+                <option value="pr">PR</option>
+                <option value="pe">PE</option>
+                <option value="pi">PI</option>
+                <option value="rj">RJ</option>
+                <option value="rn">RN</option>
+                <option value="rs">RS</option>
+                <option value="ro">RO</option>
+                <option value="rr">RR</option>
+                <option value="sc">SC</option>
+                <option value="sp">SP</option>
+                <option value="se">SE</option>
+                <option value="to">TO</option>
+            </select>
         </mat-form-field>
     </form>
+    <div mat-dialog-actions class="button">
+        <button mat-button (click)="FecharModal()">Fechar</button>
+        <button type="submit" mat-button cdkFocusInitial (click)="submit()">Atualizar cadastro</button>
+    </div>
 </div>

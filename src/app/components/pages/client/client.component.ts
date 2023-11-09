@@ -85,7 +85,7 @@ export class ClientComponent {
 
 openDialogUpdate(clientId: string) {
   const dialogRef = this.dialog.open(ModalEditClientComponent, {
-    width: '400px',
+    width: '500px',
     data: { clientId: clientId },
   })
 }

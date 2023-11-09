@@ -22,6 +22,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import { AuthenticationService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-user-list',
@@ -36,7 +37,7 @@ export class TableOverviewExample implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'acoes'];
   dataSource: MatTableDataSource<Usuario>;
   userId!: string;
-  permission: string = "true"
+  permission: string = ""
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -68,6 +69,10 @@ export class TableOverviewExample implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  convertToString(value: boolean): string {
+    return value.toString()
   }
 
   modifyPermission(permission: any, userID: string){

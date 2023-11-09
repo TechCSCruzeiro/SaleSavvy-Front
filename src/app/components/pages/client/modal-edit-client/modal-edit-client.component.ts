@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -13,24 +13,27 @@ import { MessagesSuccessService } from 'src/app/service/messages-success.service
   styleUrls: ['./modal-edit-client.component.css']
 })
 export class ModalEditClientComponent {
-  clientId!:string;
+  clientId!: string;
   client!: Client;
   clientForm!: FormGroup
+  stateUF!: string
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, 
-  private clientService: ClientService, 
-  public messagesSucessService: MessagesSuccessService, 
-  public messagesErrorService: MessagesErrorService,
-  private router: Router,
-  private dialogRef: MatDialogRef<ModalEditClientComponent>
-  ){
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private clientService: ClientService,
+    public messagesSucessService: MessagesSuccessService,
+    public messagesErrorService: MessagesErrorService,
+    private router: Router,
+    private dialogRef: MatDialogRef<ModalEditClientComponent>,
+    private renderer: Renderer2,
+  ) {
     this.clientId = data.clientId
   }
 
   ngOnInit() {
     this.clientService.getClientById(this.clientId).subscribe(
       (clients: any) => {
-        console.log(clients)
+
         this.client = {
           Id: clients.id || '',
           Name: clients.name || '',
@@ -46,18 +49,19 @@ export class ModalEditClientComponent {
             Number: clients.address.number || '',
           }
         };
-    })
-      this.clientForm = new FormGroup({
-        name: new FormControl('', [Validators.required]),
-        email: new FormControl('', [Validators.required]),
-        phone: new FormControl('', [Validators.required]),
-        code: new FormControl('', [Validators.required]),
-        state: new FormControl('', [Validators.required]),
-        city: new FormControl('', [Validators.required]),
-        district: new FormControl('', [Validators.required]),
-        street: new FormControl('', [Validators.required]),
-        number: new FormControl('', [Validators.required]),
-      });
+        this.renderer.setProperty(document.getElementById('state'), 'value', this.client.Address.State.toLowerCase());
+      })
+    this.clientForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      state: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      district: new FormControl('', [Validators.required]),
+      street: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required]),
+    });
   }
 
   get name() {
@@ -88,5 +92,20 @@ export class ModalEditClientComponent {
     return this.clientForm.get('number')!
   }
 
-  submit(){}
+  FecharModal() {
+    this.dialogRef.close();
+  }
+
+  submit() {
+    let newState = (document.getElementById('state') as HTMLSelectElement).value;
+    let stateControl = this.clientForm.get('state');
+    if(stateControl){
+      stateControl.setValue(newState);
+    }
+    if (this.clientForm.invalid) {
+      return
+    }
+    console.log(this.clientForm.value)
+    console.log("Fomulario Valido")
+  }
 }

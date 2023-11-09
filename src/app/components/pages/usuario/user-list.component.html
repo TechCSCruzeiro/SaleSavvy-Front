@@ -41,7 +41,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" class="my-menu">
-                <mat-radio-group class="radio-group" [(ngModel)]="permission" (change)="modifyPermission($event, row.id)" aria-label="Selecione o tipo de conta">
+                <mat-radio-group class="radio-group" [value]="convertToString(row.isAdm)" (change)="modifyPermission($event, row.id)" aria-label="Selecione o tipo de conta">
                   <div class="container-menu">
                   <div>
                     <mat-radio-button value="true">Administrador</mat-radio-button>

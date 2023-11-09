@@ -3,4 +3,5 @@ export interface Usuario {
     Name : string;
     Email: string;
     Password: string;
+    isAdm?: string;
 }
