@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild  } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,25 +16,26 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './modal-edit-product.component.html',
   styleUrls: ['./modal-edit-product.component.css']
 })
-export class ModalEditProductComponent implements OnInit{
+export class ModalEditProductComponent implements OnInit {
 
   @ViewChild('minhaTabela') minhaTabela: any;
 
-  productId!:string;
+  productId!: string;
   product!: Product;
   productForm!: FormGroup
   userId: string = ''
   formattedPrice!: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any,
-  private estoqueService: EstoqueService,
-  public messagesSucessService: MessagesSuccessService, 
-  public messagesErrorService: MessagesErrorService,
-  private router: Router,
-  private dialogRef: MatDialogRef<ModalEditProductComponent>,
-  private authService: AuthenticationService,
-  private spinner: NgxSpinnerService,
-  ){
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private estoqueService: EstoqueService,
+    public messagesSucessService: MessagesSuccessService,
+    public messagesErrorService: MessagesErrorService,
+    private router: Router,
+    private dialogRef: MatDialogRef<ModalEditProductComponent>,
+    private authService: AuthenticationService,
+    private spinner: NgxSpinnerService,
+  ) {
     this.productId = data.productId
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
@@ -55,16 +56,16 @@ export class ModalEditProductComponent implements OnInit{
           this.formatProductPrice();
         },
         error => {
-          console.error('Ocorreu um erro ao buscar o produto:', error);
+          this.messagesErrorService.add("Ocorreu erro ao alterar o produto " + error.error)
         }
       );
-      this.spinner.hide()
-      this.productForm = new FormGroup({
-        name: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required]),
-        price: new FormControl('', [Validators.required]),
-        quantity: new FormControl('', [Validators.required]),
-      })
+    this.spinner.hide()
+    this.productForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
+      quantity: new FormControl('', [Validators.required]),
+    })
   }
 
   get name() {
@@ -80,7 +81,7 @@ export class ModalEditProductComponent implements OnInit{
     return this.productForm.get('quantity')!
   }
 
-  ModificProductById(userId: string, form: FormGroup): ModificProduct{
+  ModificProductById(userId: string, form: FormGroup): ModificProduct {
     return {
       UserId: this.userId,
       Product: this.FormProduct(form)
@@ -97,10 +98,10 @@ export class ModalEditProductComponent implements OnInit{
       Price: typeof form.get('price')?.value === 'number' ? form.get('price')!.value : converter.formatCurrencyToNumber(form.get('price')!.value),
       Quantity: Number(form.get('quantity')!.value),
     }
-    
+
   }
 
-  FecharModal(){
+  FecharModal() {
     this.dialogRef.close();
   }
 
@@ -113,7 +114,7 @@ export class ModalEditProductComponent implements OnInit{
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-      this.productForm.get('price')!.setValue(this.formattedPrice, {emitEvent: false});
+      this.productForm.get('price')!.setValue(this.formattedPrice, { emitEvent: false });
     }
   }
 
@@ -122,19 +123,18 @@ export class ModalEditProductComponent implements OnInit{
     input.value = input.value.replace(/[^0-9]/g, '');
   }
 
-  submit(){
-   if (this.productForm.invalid) {
+  submit() {
+    if (this.productForm.invalid) {
       return;
     }
-    const updateProduct: ModificProduct = this.ModificProductById(this.userId,this.productForm)
+    const updateProduct: ModificProduct = this.ModificProductById(this.userId, this.productForm)
     console.log(updateProduct)
-    this.estoqueService.updateUser(updateProduct).subscribe((response) =>{
+    this.estoqueService.updateUser(updateProduct).subscribe((response) => {
       this.FecharModal();
       this.messagesSucessService.add("Produto alterado com sucesso")
       window.location.reload();
-      //this.router.navigate(['/estoque'])
-      
-    },(error)=>{
+
+    }, (error) => {
       console.log(updateProduct)
       this.FecharModal();
       this.messagesErrorService.add("Ocorreu erro ao alterar o produto " + error.error)

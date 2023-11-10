@@ -1,7 +1,9 @@
-import { Component, Inject, EventEmitter, Output } from '@angular/core';
+import { Component, Inject, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Client } from 'src/app/Models/Client';
+import { AuthenticationService } from 'src/app/service/auth.service';
+import { ClientService } from 'src/app/service/client.service';
 import { ImportClientSaleService } from 'src/app/service/import-clientSale.service';
 
 
@@ -10,35 +12,34 @@ import { ImportClientSaleService } from 'src/app/service/import-clientSale.servi
   templateUrl: './modal-locate-client.component.html',
   styleUrls: ['./modal-locate-client.component.css']
 })
-export class ModalLocateClientComponent {
+export class ModalLocateClientComponent implements AfterViewInit{
 
   @Output() eventAddClient = new EventEmitter<string>()
 
   displayedColumns: string[] = ['name', 'email', 'phone', 'street', 'code', 'city'];
   dataSource: MatTableDataSource<Client>;
+  userId: string
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private importClientSaleService: ImportClientSaleService,
-    private dialogRef: MatDialogRef<ModalLocateClientComponent>
+    private dialogRef: MatDialogRef<ModalLocateClientComponent>,
+    private authService: AuthenticationService,
+    private clientService: ClientService,
   ) {
-    this.dataSource = new MatTableDataSource<Client>([
-      {
-        Id: "6594b91e-a027-4db2-85b2-f37f6726b194",
-        Name: "Rikelmi",
-        Email: "Teste@Teste.com",
-        Phone: "(11)98931-2399",
-        UserID: "ID DO USUARIO",
-        Address: {
-          Code: "04433-020",
-          State: "SP",
-          City: "São Paulo",
-          District: "JD.Itapura",
-          Street: "Rua Glycerio Almeida Maciel",
-          Number: "438"
-        }
-      }
-    ]);
+
+    const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
+    this.userId = decodeToken.employeeId
+
+    this.dataSource = new MatTableDataSource<Client>();
+  }
+
+  ngAfterViewInit(){
+    console.log("ID >>> ",this.userId)
+    this.clientService.postListClient(this.userId).subscribe(clients => {
+      this.dataSource.data = clients;
+    })
+    console.log("LISTA DE CLIENTES",this.dataSource.data)
   }
 
   FecharModal(){

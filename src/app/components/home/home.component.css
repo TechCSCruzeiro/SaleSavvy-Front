@@ -1,0 +1,17 @@
+.report-1,.report-2{
+    width: 500px;
+}
+
+.container-Chart{
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.text-dashboard{
+    text-align: center;
+    margin-top: 20px;
+}
+
+hr{
+    margin-top: 15px;
+}

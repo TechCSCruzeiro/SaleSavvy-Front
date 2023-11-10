@@ -12,9 +12,14 @@ th {
   width: 25%;
 }
 
-mat-button-toggle-group {
+mat-button-toggle-group, button {
   border: none;
 }
+
+.mat-button-toggle-checked {
+  background-color: white !important;
+}
+
 
 h1 {
   margin-top: 10px;

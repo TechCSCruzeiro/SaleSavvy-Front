@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Vendas</h5>
                     <p class="card-text">Comece a incluir suas vendas.</p>
-                    <a href="#" class="btn btn-primary">Acesse agora</a>
+                    <a routerLink="/venda" class="btn btn-primary">Acesse agora</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Clientes</h5>
                     <p class="card-text">Gerencie seus clientes de forma eficiente.</p>
-                    <a href="#" class="btn btn-primary">Acesse agora</a>
+                    <a routerLink="/cliente" class="btn btn-primary">Acesse agora</a>
                 </div>
             </div>
         </div>
@@ -28,9 +28,21 @@
                 <div class="card-body">
                     <h5 class="card-title">Estoque</h5>
                     <p class="card-text">Mantenha seu estoque sempre atualizado.</p>
-                    <a href="#" class="btn btn-primary">Acesse agora</a>
+                    <a routerLink="/estoque" class="btn btn-primary">Acesse agora</a>
                 </div>
             </div>
+        </div>
+        <hr>
+    </div>
+    <div class="text-dashboard">
+        <h2>Dashboard</h2>
+    </div>
+    <div class="container-Chart">
+        <div class="report-1">
+            <canvas id="weekChart"></canvas>
+        </div>
+        <div class="report-2">
+            <canvas id="salesChart"></canvas>
         </div>
     </div>
 </div>

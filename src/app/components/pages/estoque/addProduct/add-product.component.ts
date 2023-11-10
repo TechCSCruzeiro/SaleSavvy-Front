@@ -18,7 +18,8 @@ export class AddProductComponent implements OnInit {
   productForm!: FormGroup
   UserId: string = ''
 
-  constructor(private estoqueService: EstoqueService, 
+  constructor(
+    private estoqueService: EstoqueService, 
     public messagesSucessService: MessagesSuccessService, 
     public messagesErrorService: MessagesErrorService, 
     private router: Router, 
@@ -71,9 +72,6 @@ export class AddProductComponent implements OnInit {
     const product: Product = this.FormProduct(this.productForm)
     console.log(product)
     this.estoqueService.createProduct(product).subscribe((response) => {
-      const returnApi = response
-      console.log("Retorno da API", returnApi)
-      console.log("Produto criado com sucesso")
       this.messagesSucessService.add("Produto Criado com sucesso")
       this.router.navigate(['/estoque'])
     }, (error) => {

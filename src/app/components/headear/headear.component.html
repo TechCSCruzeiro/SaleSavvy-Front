@@ -19,10 +19,11 @@
 
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
+
+   <a routerLink="/"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
       <mat-icon aria-hidden="false" aria-label="Exemplo de ícone de página inicial" fontIcon="home"></mat-icon>
       Home
-    </button><br>
+    </button><br></a>
     <a routerLink="/venda"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
         <mat-icon svgIcon="icon-vendas" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
         Vendas
