@@ -12,8 +12,10 @@ import { AddProductComponent } from "./components/pages/estoque/addProduct/add-p
 import { RelatorioComponent } from "./components/pages/relatorio/relatorio.component";
 import { ClientComponent } from "./components/pages/client/client.component";
 import { AdminGuard } from "./service/admin.guard";
+import { LoginGuard } from "./service/login.guard";
 
 const routes: Routes = [
+    {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'venda', component: VendaComponent, canActivate: [AuthGuard]},
     {path: 'estoque', component: EstoqueComponent, canActivate: [AuthGuard]},

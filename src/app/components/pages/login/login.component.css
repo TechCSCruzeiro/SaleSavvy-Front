@@ -1,21 +1,30 @@
 ::ng-deep body {
-    background: linear-gradient(129deg, #e0fce6 0%, #d8fdff 50%, #e7e0ff 100%);
+  background: linear-gradient(129deg, #e0fce6 0%, #d8fdff 50%, #e7e0ff 100%);
 }
 
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
 
-  .button{
-    text-align: center;
-  }
+.example-full-width {
+  width: 100%;
+}
 
-  .card-body{
-    margin-top: 20%;
-  }
+.button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Adicione o seguinte CSS para ajustar a largura dos campos de entrada */
+input.matInput {
+  width: 100%;
+}

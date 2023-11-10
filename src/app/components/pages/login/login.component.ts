@@ -23,7 +23,8 @@ import { Location } from '@angular/common';
 export class LoginComponent {
   login!: Login
   imagemSrc = 'assets/img/img-login-80.png';
-
+  hide = true;
+  
   emailFormControl = new FormControl('', [Validators.required, Validators.email])
   passwordFormControl = new FormControl('', [Validators.required])
 
@@ -52,6 +53,7 @@ export class LoginComponent {
     this.loginService.postLogin(this.login).subscribe((response: any) =>{
       this.authService.login(response.token)
       this.messagesSucessService.add("Login feito com Sucesso");
+      this.router.navigate(['/'])
       location.reload();
       
     }, (error)=>{

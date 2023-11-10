@@ -43,7 +43,7 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="addClient(row.Id)"></mat-row>
             </mat-table>
-            <div class="button-close"><button mat-stroked-button color="warn" class="element-button">Fechar</button>
+            <div class="button-close"><button mat-stroked-button color="warn" class="element-button" (click)="FecharModal()">Fechar</button>
             </div>
         </mat-card-content>
 

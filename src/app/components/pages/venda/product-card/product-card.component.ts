@@ -59,6 +59,7 @@ export class ProductCardComponent {
             Quantity: product.quantity,
             QuantityDisplay: Array.from({ length: product.quantity }, (_, index) => index + 1)
           }
+          this.productAdded.Quantity = 0
           this.AddProduct(this.productAdded!)
           this.checkoutService.changeProduct(this.transactions)
         })
@@ -83,6 +84,7 @@ export class ProductCardComponent {
 
   sendListProduct() { //Enviando Array para o component Venda
     this.exportProductCartService.changeProduct(this.transactions);
+    
   }
 
   ModalAddProduct() {

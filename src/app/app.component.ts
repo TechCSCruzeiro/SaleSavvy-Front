@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 
     this.isLoginPage = this.authService.isAuthenticated()
+    console.log(this.isLoginPage)
   }
 
 }

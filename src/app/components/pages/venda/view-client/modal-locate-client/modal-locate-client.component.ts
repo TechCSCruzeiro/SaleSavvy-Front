@@ -1,5 +1,5 @@
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Client } from 'src/app/Models/Client';
 import { ImportClientSaleService } from 'src/app/service/import-clientSale.service';
@@ -19,7 +19,8 @@ export class ModalLocateClientComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private importClientSaleService: ImportClientSaleService 
+    private importClientSaleService: ImportClientSaleService,
+    private dialogRef: MatDialogRef<ModalLocateClientComponent>
   ) {
     this.dataSource = new MatTableDataSource<Client>([
       {
@@ -40,6 +41,10 @@ export class ModalLocateClientComponent {
     ]);
   }
 
+  FecharModal(){
+    this.dialogRef.close();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -47,6 +52,7 @@ export class ModalLocateClientComponent {
 
   addClient(guid: string){
     this.importClientSaleService.sendGuidUser(guid)
+    this.FecharModal()
   }
 
 }

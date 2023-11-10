@@ -2,33 +2,35 @@
   flex: 1 1 auto;
 }
 
-router-outlet, app-messages-success, app-messages-error {
+router-outlet,
+app-messages-success,
+app-messages-error {
   overflow: auto;
 }
 
 .example-container {
-    width: auto;
-    height: 100%;
-    overflow-y: auto;
-  }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  
-  .example-sidenav {
-    padding-left: 5px;
-    padding-right: 9px;
-    border: none;
-    background-color: #F5F5F5;
-    border: 1px solid #e7e7e7;
-  }
+  width: auto;
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
 
-  .botao-nav {
-    margin-top: 15px;
-    height: 50px;
-  }
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.example-sidenav {
+  padding-left: 5px;
+  padding-right: 9px;
+  border: none;
+  background-color: #F5F5F5;
+  border: 1px solid #e7e7e7;
+}
+
+.botao-nav {
+  margin-top: 15px;
+  height: 50px;
+}

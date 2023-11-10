@@ -32,6 +32,12 @@
         Estoque
       </button></a><br>
     <div *ngIf="isAdmin == 'True' ">
+      <a routerLink="/cliente"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
+          <mat-icon svgIcon="icon-client" aria-hidden="false" aria-label="Menu lista de usuario"></mat-icon>
+          Clientes
+        </button></a><br>
+    </div>
+    <div *ngIf="isAdmin == 'True' ">
       <a routerLink="/usuario"><button (click)="showFiller = !showFiller" mat-raised-button class="botao-nav">
           <mat-icon svgIcon="icon-usuario" aria-hidden="false" aria-label="Menu lista de usuario"></mat-icon>
           Usuarios
@@ -43,7 +49,5 @@
       </button></a><br>
 
   </mat-drawer>
-  <app-messages-success></app-messages-success>
-  <app-messages-error></app-messages-error>
   <router-outlet></router-outlet>
 </mat-drawer-container>
