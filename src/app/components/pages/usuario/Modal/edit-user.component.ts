@@ -86,7 +86,9 @@ export class EditUserComponent implements OnInit{
     const updateUser: Usuario = this.FormUsuario(this.usuarioForm)
     this.usuarioService.updateUser(updateUser).subscribe((response)=>{
       this.messagesSucessService.add("Usuario Alterado com Sucesso")
-      this.router.navigate(['/usuario/list'])
+      //this.router.navigate(['/usuario/list'])
+      this.FecharModal();
+      window.location.reload();
     },(error)=>{
       this.FecharModal();
       this.messagesErrorService.add("Ocorreu erro ao alterar o usuario: " + error.error)

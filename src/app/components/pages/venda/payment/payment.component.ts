@@ -7,6 +7,8 @@ import { AuthenticationService } from 'src/app/service/auth.service';
 import { CheckoutService } from 'src/app/service/checkout.service';
 import { ImportClientSaleService } from 'src/app/service/import-clientSale.service';
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
+import { TransactionalService } from 'src/app/service/transactional.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Payment {
   value: string;
@@ -36,6 +38,8 @@ export class PaymentComponent {
     private importClientSaleService: ImportClientSaleService,
     public messagesErrorService: MessagesErrorService,
     private authService: AuthenticationService,
+    private transactionalService: TransactionalService,
+    private snackBar: MatSnackBar
   ) {
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.userId = decodeToken.employeeId
@@ -124,7 +128,15 @@ export class PaymentComponent {
         this.products,
         this.payment.parcel ?? 0,
         this.payment.value)
-        console.log("Convertido para SalesConfirmation",confirmPayment)
+        this.transactionalService.transaction(confirmPayment).subscribe((response)=>{
+          this.snackBar.open('Venda finalizada com sucesso!', 'Fechar', {
+            duration: 3000,
+          });
+          location.reload();
+        },(error)=>{
+          console.log(error)
+        })
+
 
         
     }

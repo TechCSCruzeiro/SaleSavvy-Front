@@ -25,18 +25,18 @@
 
                 <ng-container matColumnDef="street">
                     <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Endereço </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.Street}}, {{element.Address.Number}}
+                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.street}}, {{element.Address.Number}}
                         - {{element.Address.District}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="code">
                     <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> CEP </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.Code}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.code}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="city">
                     <mat-header-cell mat-header-cell *matHeaderCellDef class="coluna"> Cidade / UF </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.City}}, {{element.Address.State}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let element"> {{element.Address.city}}, {{element.Address.State}}</mat-cell>
                 </ng-container>
 
 

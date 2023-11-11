@@ -15,6 +15,7 @@ export class UsuarioService {
     private apiUrlGetById = 'https://localhost:7142/api/User/findUserById'
     private apiUrlPut = 'https://localhost:7142/api/User/updateUser'
     private apiUrlDelete = 'https://localhost:7142/api/User/deleteUser'
+    private apiUrlModifyPermission = 'https://localhost:7142/api/User/Alter/Type?userId='
 
     constructor(private http: HttpClient) {
 
@@ -37,11 +38,16 @@ export class UsuarioService {
     }
 
     updateUser(updateUser: Usuario): Observable<Usuario>{
-        return this.http.put<Usuario>(`${this.apiUrlPut}/${updateUser.Id}`, updateUser);
+        return this.http.put<Usuario>(`${this.apiUrlPut}`, updateUser);
     }
 
     deleteUser(userId: string): Observable<any>{
         return this.http.delete<any>(`${this.apiUrlDelete}/${userId}`);
+    }
+
+    updatePermission(userId: string,isAdm: boolean): Observable<any>{
+        const permiss = ''
+        return this.http.put<any>(`${this.apiUrlModifyPermission}${userId}&isAdm=${isAdm}`, permiss);
     }
 
 }

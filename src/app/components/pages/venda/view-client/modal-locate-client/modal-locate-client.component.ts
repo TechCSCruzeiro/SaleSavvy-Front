@@ -31,15 +31,25 @@ export class ModalLocateClientComponent implements AfterViewInit{
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.userId = decodeToken.employeeId
 
-    this.dataSource = new MatTableDataSource<Client>();
+    this.dataSource = new MatTableDataSource();
   }
 
-  ngAfterViewInit(){
-    console.log("ID >>> ",this.userId)
-    this.clientService.postListClient(this.userId).subscribe(clients => {
-      this.dataSource.data = clients;
-    })
-    console.log("LISTA DE CLIENTES",this.dataSource.data)
+  ngAfterViewInit() {
+    console.log("ID >>> ", this.userId);
+    this.clientService.postListClient(this.userId).subscribe((clients: any[]) => {
+      const clientsConverted: Client[] = clients.map((client) => {
+        return {
+          Id: client.id,
+          Name: client.name,
+          Email: client.email,
+          Address: client.address,
+          Phone: client.phone,
+          UserID: client.userId,
+        };
+      });
+      this.dataSource.data = clientsConverted;
+    });
+    console.log("LISTA DE CLIENTES", this.dataSource);
   }
 
   FecharModal(){

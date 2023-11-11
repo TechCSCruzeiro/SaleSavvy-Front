@@ -31,6 +31,7 @@ export class RelatorioComponent {
   relatorio: RelatorioView[] = [
     { Name: 'Relatorio Movimetação do Estoque', ReportID: 1 },
     { Name: 'Relatorio de Estoque', ReportID: 2 },
+    { Name: 'Relatorio de Vendas', ReportID: 3 },
   ];
 
   firstFormGroup = this._formBuilder.group({
@@ -66,6 +67,11 @@ export class RelatorioComponent {
           return {
             Router: 2,
             NameRecord: 'Relatorio do Estoque.xlsx'
+          }
+        case 3:
+          return {
+            Router: 3,
+            NameRecord: 'Relatorio de Vendas.xlsx'
           }
         default:
           console.log('Relatorio não encontrado')
@@ -144,6 +150,27 @@ export class RelatorioComponent {
         this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
       })
     }
+
+    if (routerRecord.Router === 3) {
+      this.recordService.getSales(params).subscribe((response) => {
+        console.log("Deu Certo: ", response)
+        this.recordService.getdownloadRecord(response).subscribe(data => {
+          const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = routerRecord.NameRecord;
+          link.click();
+
+          window.URL.revokeObjectURL(url);
+        })
+
+      }, (erro) => {
+        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+      })
+    }
+
   }
 
 

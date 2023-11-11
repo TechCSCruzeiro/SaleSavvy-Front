@@ -74,6 +74,7 @@ import { ModalRemoveClientComponent } from './components/pages/client/modal-remo
 import { ModalEditClientComponent } from './components/pages/client/modal-edit-client/modal-edit-client.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AddClientComponent } from './components/pages/client/add-client/add-client.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -147,6 +148,7 @@ import { AddClientComponent } from './components/pages/client/add-client/add-cli
     MatNativeDateModule,
     MatStepperModule,
     NgChartsModule,
+    MatSnackBarModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

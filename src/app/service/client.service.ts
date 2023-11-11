@@ -28,7 +28,7 @@ export class ClientService {
     //             'Content-Type': 'application/json'
     //         })
     //     };
-    //     return this.http.post<Client[]>(this.apiUrlPostList, {userId: userId}, httpOptions)
+    //     return this.http.post<Client[]>(`${this.apiUrlPostList}${userId}`, httpOptions)
     // }
 
     getClientById(clientId: string): Observable<Client>{

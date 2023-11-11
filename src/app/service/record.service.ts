@@ -15,6 +15,7 @@ import { Product } from '../Models/Product';
 export class RecordService{
     private apiUrlPostMovimentStock = 'https://localhost:7142/api/MovementRecords/record/movement/stock'
     private apiUrlPostStock = 'https://localhost:7142/api/MovementRecords/record/stock'
+    private apiUrlPostSales = 'https://localhost:7142/api/MovementRecords/record/salles'
     
     private apiUrlGetDownload = 'https://localhost:7142/api/MovementRecords/api/excel/download?fileId='
     
@@ -39,6 +40,16 @@ export class RecordService{
             })
         };
         return this.http.post<any>(this.apiUrlPostStock, params, httpOptions)
+    }
+
+    getSales(params: Record): Observable<any>
+    {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.http.post<any>(this.apiUrlPostSales, params, httpOptions)
     }
 
     getdownloadRecord(idRecord: string): Observable<Blob>{

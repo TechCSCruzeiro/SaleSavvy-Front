@@ -23,6 +23,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { AuthenticationService } from 'src/app/service/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-list',
@@ -47,6 +48,7 @@ export class TableOverviewExample implements AfterViewInit {
     public dialog: MatDialog,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private snackBar: MatSnackBar,
   ) {
     this.dataSource = new MatTableDataSource();
   }
@@ -76,7 +78,15 @@ export class TableOverviewExample implements AfterViewInit {
   }
 
   modifyPermission(permission: any, userID: string){
-    console.log("Premissão",permission.value, "ID do USUARIO: ", userID)
+    console.log(permission)
+    this.usuarioService.updatePermission(userID, permission.value).subscribe((response)=>{
+      this.snackBar.open('Usuario atualizado com sucesso', 'Fechar', {
+        duration: 3000,
+      });
+      location.reload();
+    },(error)=>{
+      console.log(error)
+    })
   }
 
   clickedRows = new Set<any>();
