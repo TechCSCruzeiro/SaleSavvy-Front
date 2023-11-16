@@ -13,11 +13,11 @@ import { ModificProduct } from '../Models/ModificProduct';
 
 export class EstoqueService{
 
-    private apiUrlGet = 'https://localhost:7142/api/Products/ListProduct?userId='
-    private apiUrlPost = 'https://localhost:7142/api/Products/InsertProduct'
-    private apiUrlGetById = 'https://localhost:7142/api/Products/Find/ProductById?productId='
-    private apiUrlDelete = 'https://localhost:7142/api/Products/DesactiveProduct?productId='
-    private apiUrlPut = 'https://localhost:7142/api/Products/ModificProduct'
+    private apiUrlGet = 'http://179.209.132.132:5000/api/Products/ListProduct?userId='
+    private apiUrlPost = 'http://179.209.132.132:5000/api/Products/InsertProduct'
+    private apiUrlGetById = 'http://179.209.132.132:5000/api/Products/Find/ProductById?productId='
+    private apiUrlDelete = 'http://179.209.132.132:5000/api/Products/DesactiveProduct?productId='
+    private apiUrlPut = 'http://179.209.132.132:5000/api/Products/ModificProduct'
 
     constructor(private http: HttpClient) 
     {

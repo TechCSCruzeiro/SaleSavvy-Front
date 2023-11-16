@@ -13,11 +13,11 @@ import { Product } from '../Models/Product';
 })
 
 export class RecordService{
-    private apiUrlPostMovimentStock = 'https://localhost:7142/api/MovementRecords/record/movement/stock'
-    private apiUrlPostStock = 'https://localhost:7142/api/MovementRecords/record/stock'
-    private apiUrlPostSales = 'https://localhost:7142/api/MovementRecords/record/salles'
+    private apiUrlPostMovimentStock = 'http://179.209.132.132:5000/api/MovementRecords/record/movement/stock'
+    private apiUrlPostStock = 'http://179.209.132.132:5000/api/MovementRecords/record/stock'
+    private apiUrlPostSales = 'http://179.209.132.132:5000/api/MovementRecords/record/salles'
     
-    private apiUrlGetDownload = 'https://localhost:7142/api/MovementRecords/api/excel/download?fileId='
+    private apiUrlGetDownload = 'http://179.209.132.132:5000/api/MovementRecords/api/excel/download?fileId='
     
 
     constructor (private http: HttpClient){}

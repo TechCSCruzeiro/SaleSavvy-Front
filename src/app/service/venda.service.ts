@@ -11,7 +11,7 @@ import { Client } from '../Models/Client';
 
 export class VendaService {
     private apiSearchAddress = 'https://viacep.com.br/ws'
-    private apiUrlPost = 'https://localhost:7142/api/Client/Register/Customer'
+    private apiUrlPost = 'http://179.209.132.132:5000/api/Client/Register/Customer'
 
     constructor(private http: HttpClient){}
 

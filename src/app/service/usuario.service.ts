@@ -10,12 +10,12 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrlPost = 'https://localhost:7142/api/User/register'
-    private apiUrlGet = "https://localhost:7142/api/User/listUser"
-    private apiUrlGetById = 'https://localhost:7142/api/User/findUserById'
-    private apiUrlPut = 'https://localhost:7142/api/User/updateUser'
-    private apiUrlDelete = 'https://localhost:7142/api/User/deleteUser'
-    private apiUrlModifyPermission = 'https://localhost:7142/api/User/Alter/Type?userId='
+    private apiUrlPost = 'http://179.209.132.132:5000/api/User/register'
+    private apiUrlGet = "http://179.209.132.132:5000/api/User/listUser"
+    private apiUrlGetById = 'http://179.209.132.132:5000/api/User/findUserById'
+    private apiUrlPut = 'http://179.209.132.132:5000/api/User/updateUser'
+    private apiUrlDelete = 'http://179.209.132.132:5000/api/User/deleteUser'
+    private apiUrlModifyPermission = 'http://179.209.132.132:5000/api/User/Alter/Type?userId='
 
     constructor(private http: HttpClient) {
 

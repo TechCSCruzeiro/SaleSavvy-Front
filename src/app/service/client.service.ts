@@ -13,10 +13,10 @@ import { Observable } from 'rxjs';
 export class ClientService {
     constructor(private http: HttpClient) { }
 
-    private apiUrlPostList = 'https://localhost:7142/api/Client/Search/ListClient?userId='
+    private apiUrlPostList = 'http://179.209.132.132:5000/api/Client/Search/ListClient?userId='
     private apiUrlDelete = 'Deletar'
     private apiUrlPut = 'Link Modificar'
-    private apiUrlGetById = 'https://localhost:7142/api/Client/test'
+    private apiUrlGetById = 'http://179.209.132.132:5000/api/Client/test'
 
     postListClient(userId: string): Observable<Client[]>{
         return this.http.get<Client[]>(`${this.apiUrlPostList}${userId}`);

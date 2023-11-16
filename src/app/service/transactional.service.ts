@@ -12,7 +12,7 @@ import { SalesConfirmation } from '../Models/SalesConfirmation';
 })
 
 export class TransactionalService{
-    private apiUrlPost = 'https://localhost:7142/api/Sales'
+    private apiUrlPost = 'http://179.209.132.132:5000/api/Sales'
 
     constructor(private http: HttpClient) 
     {
