@@ -26,7 +26,7 @@ export class UsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)]),
       senha: new FormControl('', [Validators.required]),
       senha2: new FormControl('', [Validators.required]),
       permissao: new FormControl(''),

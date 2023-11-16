@@ -25,8 +25,7 @@ export class LoginComponent {
   imagemSrc = 'assets/img/img-login-80.png';
   hide = true;
   
-  emailFormControl = new FormControl('', [Validators.required, Validators.email])
-  passwordFormControl = new FormControl('', [Validators.required])
+  
 
   constructor(private loginService: LoginService, private authService: AuthenticationService,
     public messagesSucessService: MessagesSuccessService, 
@@ -37,9 +36,8 @@ export class LoginComponent {
 
   }
 
-  ngOnInit(){
-    
-  }
+  emailFormControl = new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)])
+  passwordFormControl = new FormControl('', [Validators.required])
 
   convertLoginModel(email: string, password: string): Login{
     return{
@@ -49,6 +47,9 @@ export class LoginComponent {
   }
 
   submit(){
+    if(this.emailFormControl.invalid || this.passwordFormControl.invalid){
+      return
+    }
     this.login = this.convertLoginModel(this.emailFormControl.value!, this.passwordFormControl.value!)
     this.loginService.postLogin(this.login).subscribe((response: any) =>{
       this.authService.login(response.token)
