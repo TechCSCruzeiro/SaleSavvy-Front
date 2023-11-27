@@ -10,39 +10,30 @@
                 <mat-card-content >
                     <div class="info">
                         <div class="item">
-                            <p><strong>Nome:</strong> {{client.Name}} </p>
-                        </div>
+                            <p><strong>Nome:</strong> {{client.Name}}</p> </div>
                         <div class="item">
-                            <p><strong>Email:</strong> Rikelme.sivla@gmail.com</p>
-                        </div>
+                            <p><strong>Email:</strong> {{client.Email}}</p> </div>
                         <div class="item">
-                            <p><strong>Telefone:</strong> (11)98931-2399</p>
-                        </div>
+                            <p><strong>Telefone:</strong> {{client.Phone}}</p> </div>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="endereco">
                         <div class="item">
-                            <p><strong>Endereço:</strong> Rua Glycerio Almeida</p>
-                        </div>
+                            <p><strong>Endereço:</strong> {{client.Address.Street}}</p> </div>
                         <div class="item">
-                            <p><strong>CEP:</strong> 04433-020</p>
-                        </div>
+                            <p><strong>CEP:</strong> {{client.Address.Code}}</p> </div>
                         <div class="item">
-                            <p><strong>Bairro:</strong> JD.Itapura</p>
-                        </div>
+                            <p><strong>Bairro:</strong> {{client.Address.District}}</p> </div>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="endereco2">
                         <div class="item">
-                            <p><strong>Cidade:</strong> São Paulo</p>
-                        </div>
+                            <p><strong>Cidade:</strong> {{client.Address.City}}</p> </div>
                         <div class="item">
-                            <p><strong>Estado:</strong> SP</p>
-                        </div>
+                            <p><strong>Estado:</strong> {{client.Address.State}}</p> </div>
                     </div>
                 </mat-card-content>
             </mat-card>
         </div>
     </mat-card-content>
 </mat-card>
-

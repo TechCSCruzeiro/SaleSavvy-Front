@@ -7,17 +7,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable} from 'rxjs';
 import { Record } from '../Models/Record';
 import { Product } from '../Models/Product';
+import { environment } from '../environments/environmet';
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class RecordService{
-    private apiUrlPostMovimentStock = 'http://179.209.132.132:5000/api/MovementRecords/record/movement/stock'
-    private apiUrlPostStock = 'http://179.209.132.132:5000/api/MovementRecords/record/stock'
-    private apiUrlPostSales = 'http://179.209.132.132:5000/api/MovementRecords/record/salles'
+    private apiUrlPostMovimentStock = environment.apiUrl.concat('/MovementRecords/record/movement/stock')
+    private apiUrlPostStock = environment.apiUrl.concat('/MovementRecords/record/stock')
+    private apiUrlPostSales = environment.apiUrl.concat('/MovementRecords/record/salles')
     
-    private apiUrlGetDownload = 'http://179.209.132.132:5000/api/MovementRecords/api/excel/download?fileId='
+    private apiUrlGetDownload = environment.apiUrl.concat('/MovementRecords/api/excel/download?fileId=')
     
 
     constructor (private http: HttpClient){}

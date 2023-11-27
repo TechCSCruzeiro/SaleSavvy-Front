@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import {Observable} from 'rxjs';
 import { ModificProduct } from '../Models/ModificProduct';
+import { environment } from '../environments/environmet';
 
 @Injectable({
     providedIn: 'root',
@@ -13,11 +14,11 @@ import { ModificProduct } from '../Models/ModificProduct';
 
 export class EstoqueService{
 
-    private apiUrlGet = 'http://179.209.132.132:5000/api/Products/ListProduct?userId='
-    private apiUrlPost = 'http://179.209.132.132:5000/api/Products/InsertProduct'
-    private apiUrlGetById = 'http://179.209.132.132:5000/api/Products/Find/ProductById?productId='
-    private apiUrlDelete = 'http://179.209.132.132:5000/api/Products/DesactiveProduct?productId='
-    private apiUrlPut = 'http://179.209.132.132:5000/api/Products/ModificProduct'
+    private apiUrlGet = environment.apiUrl.concat('/Products/ListProduct?userId=')
+    private apiUrlPost = environment.apiUrl.concat('/Products/InsertProduct')
+    private apiUrlGetById = environment.apiUrl.concat('/Products/Find/ProductById?productId=')
+    private apiUrlDelete = environment.apiUrl.concat('/Products/DesactiveProduct?productId=')
+    private apiUrlPut = environment.apiUrl.concat('/Products/ModificProduct')
 
     constructor(private http: HttpClient) 
     {

@@ -5,17 +5,18 @@ import { Usuario } from '../Models/Usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import {Observable} from 'rxjs';
+import { environment } from '../environments/environmet';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UsuarioService {
-    private apiUrlPost = 'http://179.209.132.132:5000/api/User/register'
-    private apiUrlGet = "http://179.209.132.132:5000/api/User/listUser"
-    private apiUrlGetById = 'http://179.209.132.132:5000/api/User/findUserById'
-    private apiUrlPut = 'http://179.209.132.132:5000/api/User/updateUser'
-    private apiUrlDelete = 'http://179.209.132.132:5000/api/User/deleteUser'
-    private apiUrlModifyPermission = 'http://179.209.132.132:5000/api/User/Alter/Type?userId='
+    private apiUrlPost = environment.apiUrl.concat('/User/register')
+    private apiUrlGet = environment.apiUrl.concat('/User/listUser')
+    private apiUrlGetById = environment.apiUrl.concat('/User/findUserById')
+    private apiUrlPut = environment.apiUrl.concat('/User/updateUser')
+    private apiUrlDelete = environment.apiUrl.concat('/User/deleteUser')
+    private apiUrlModifyPermission = environment.apiUrl.concat('/User/Alter/Type?userId=')
 
     constructor(private http: HttpClient) {
 

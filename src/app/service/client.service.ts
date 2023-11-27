@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Client } from '../Models/Client'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-
+import { environment } from '../environments/environmet';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,26 +13,27 @@ import { Observable } from 'rxjs';
 export class ClientService {
     constructor(private http: HttpClient) { }
 
-    private apiUrlPostList = 'http://179.209.132.132:5000/api/Client/Search/ListClient?userId='
+    
+    private apiUrlPostList = environment.apiUrl.concat('/Client/Search/ListClient?userId=')
     private apiUrlDelete = 'Deletar'
     private apiUrlPut = 'Link Modificar'
-    private apiUrlGetById = 'http://179.209.132.132:5000/api/Client/test'
+    private apiUrlGetById = environment.apiUrl.concat('/Client/Search/Client?userId=')
 
     postListClient(userId: string): Observable<Client[]>{
         return this.http.get<Client[]>(`${this.apiUrlPostList}${userId}`);
     }
 
-    // postListClient(userId: string): Observable<Client[]>{
-    //     const httpOptions = {
-    //         headers: new HttpHeaders({
-    //             'Content-Type': 'application/json'
-    //         })
-    //     };
-    //     return this.http.post<Client[]>(`${this.apiUrlPostList}${userId}`, httpOptions)
-    // }
+    postClientById(clientId: string): Observable<Client>{
+         const httpOptions = {
+             headers: new HttpHeaders({
+                 'Content-Type': 'application/json'
+             })
+         };
+         return this.http.post<Client>(`${this.apiUrlGetById}${clientId}`, httpOptions)
+     }
 
     getClientById(clientId: string): Observable<Client>{
-        return this.http.get<Client>(`${this.apiUrlGetById}/${clientId}`);
+        return this.http.get<Client>(`${this.apiUrlGetById}${clientId}`);
     }
 
     updateUser(updateClient: Client): Observable<Client>{

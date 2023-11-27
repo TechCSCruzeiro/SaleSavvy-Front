@@ -35,7 +35,6 @@ export class ModalLocateClientComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    console.log("ID >>> ", this.userId);
     this.clientService.postListClient(this.userId).subscribe((clients: any[]) => {
       const clientsConverted: Client[] = clients.map((client) => {
         return {
@@ -49,7 +48,6 @@ export class ModalLocateClientComponent implements AfterViewInit{
       });
       this.dataSource.data = clientsConverted;
     });
-    console.log("LISTA DE CLIENTES", this.dataSource);
   }
 
   FecharModal(){

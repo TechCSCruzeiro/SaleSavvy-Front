@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable} from 'rxjs';
 import { Address } from '../Models/Address';
 import { Client } from '../Models/Client';
+import { environment } from '../environments/environmet';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ import { Client } from '../Models/Client';
 
 export class VendaService {
     private apiSearchAddress = 'https://viacep.com.br/ws'
-    private apiUrlPost = 'http://179.209.132.132:5000/api/Client/Register/Customer'
+    private apiUrlPost = environment.apiUrl.concat('/Client/Register/Customer')
 
     constructor(private http: HttpClient){}
 

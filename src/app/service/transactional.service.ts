@@ -6,13 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import {Observable} from 'rxjs';
 import { SalesConfirmation } from '../Models/SalesConfirmation';
+import { environment } from '../environments/environmet';
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class TransactionalService{
-    private apiUrlPost = 'http://179.209.132.132:5000/api/Sales'
+    private apiUrlPost = environment.apiUrl.concat('/Sales')
 
     constructor(private http: HttpClient) 
     {
