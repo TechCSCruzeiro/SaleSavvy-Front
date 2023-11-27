@@ -18,74 +18,39 @@ export class ViewClientComponent {
     private importClientSaleService: ImportClientSaleService,
     private clientService: ClientService,
   ) { 
-    this.client = {
-      Id: '',
-      Name: '',
-      Email: '',
-      Phone: '',
-      UserID: '',
-      Address: {
-        Code: '',
-        State: '',
-        City: '',
-        District: '',
-        Street: '',
-        Number: ''
-      }
-    };
   }
   
   ngOnInit() {
     this.importClientSaleService.Guid$.subscribe(async (guidUser) => {
       const response = await this.clientService.postClientById(guidUser).toPromise();
-      console.log(response);
-      // Atualiza a instância do cliente com os dados da resposta
-      this.client = response ? {
-        Id: response.Id,
-        Name: response.Name,
-        Email: response.Email,
-        Phone: response.Phone,
-        UserID: response.UserID,
-        Address: response.Address ? {
-          Code: response.Address.Code,
-          State: response.Address.State,
-          City: response.Address.City,
-          District: response.Address.District,
-          Street: response.Address.Street,
-          Number: response.Address.Number
-        } : {
-          Code: '',
-          State: '',
-          City: '',
-          District: '',
-          Street: '',
-          Number: ''
-        }
-      } : {
-        Id: '',
-        Name: '',
-        Email: '',
-        Phone: '',
-        UserID: '',
-        Address: {
-          Code: '',
-          State: '',
-          City: '',
-          District: '',
-          Street: '',
-          Number: ''
-        }
-      };
-      console.log("CLIENTE: ",this.client)
+      this.modifyClient(response);
       if (this.client) {
         this.importClientSaleService.changeClient(this.client);
       }
     });
   }
   
+  modifyClient(client: any){
+    this.client = {
+      Id: client.id,
+      Name: client.name,
+      Email: client.email,
+      Phone: client.phone,
+      UserID: client.userId,
+      Address: {
+        Code: client.address.code,
+        State: client.address.state,
+        City: client.address.city,
+        District: client.address.district,
+        Street: client.address.street,
+        Number: client.address.number
+      }
+    };
+  }
+
   ModalAddClient() {
     const dialogRef = this.dialog.open(ModalLocateClientComponent, {
-      width: 'auto', // Defina a largura do modal conforme necessário
+      width: 'auto',
     })
   }
 }

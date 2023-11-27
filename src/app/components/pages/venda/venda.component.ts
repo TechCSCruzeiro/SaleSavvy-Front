@@ -84,7 +84,6 @@ export class VendaComponent implements OnInit {
     return this.clienteForm.get('uf')!
   }
 
-  //Limpar Formulario: 
   clearForm() {
     this.clienteForm.get('name')!.setValue('');
     this.clienteForm.get('phone')!.setValue('');
@@ -97,13 +96,11 @@ export class VendaComponent implements OnInit {
     this.clienteForm.get('uf')!.setValue('');
   }
 
-  //Bloqueando Letras, Permitindo apenas Numero
   onInputChange(event: any) {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/[^0-9]/g, '');
   }
 
-  //Formatando para (XX)XXXXX-XXXX
   formatPhone(event: any) {
     let inputValue = event.target.value.replace(/\D/g, '');
     const isElevenDigits = inputValue.length === 11;
@@ -117,7 +114,6 @@ export class VendaComponent implements OnInit {
     this.clienteForm.get('phone')!.setValue(inputValue);
   }
 
-  //Convertendo em Address
   SearchAddress(address: any): Address {
     const city = address.localidade || address.city;
     const district = address.bairro || address.district;
@@ -133,7 +129,6 @@ export class VendaComponent implements OnInit {
     }
   }
 
-  //Convertendo em Client
   FormClient(form: FormGroup): Client {
     return {
       Name: form.get('name')!.value,
@@ -144,13 +139,16 @@ export class VendaComponent implements OnInit {
     }
   }
 
-  //Buscando endereço pelo CEP na API VIACEP
   SearchCEP() {
     const cepValue = this.clienteForm.get('cep')!.value;
     this.vendaService.getAddress(cepValue).subscribe((response) => {
       this.addressForm = this.SearchAddress(response)
       if ('erro' in response && response.erro === true) {
         this.errorCEP = "CEP não encontrado"
+        setTimeout(()=> {
+          this.errorCEP = ""
+        }, 3000
+        );
       } else {
         this.renderer.setProperty(document.getElementById('uf'), 'value', this.addressForm.State.toLowerCase());
         const { name, email, phone, number } = this.clienteForm.value;
@@ -167,12 +165,10 @@ export class VendaComponent implements OnInit {
         });
       }
     }, (error) => {
-      const returnApi = error
-      console.log(returnApi)
+      this.messagesErrorService.add('Erro ao encontrar o CEP!')
     })
   }
 
-  //Enviando formulario para Back-end
   submit() {
     if (this.clienteForm.invalid) {
       return;
@@ -183,8 +179,7 @@ export class VendaComponent implements OnInit {
       this.clearForm()
       this.disabled = false
     }, (erro) => {
-      console.log(client)
-      console.log(erro)
+      this.messagesErrorService.add('Erro ao cadastrar o cliente! ')
     })
   }
 }

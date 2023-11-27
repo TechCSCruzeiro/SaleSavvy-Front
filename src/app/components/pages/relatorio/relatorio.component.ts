@@ -102,10 +102,8 @@ export class RelatorioComponent {
   }
 
   generateReport() {
-    //console.log(this.relatorioControl.value)
     const routerRecord = this.routerRecord()
     const params = this.convertReport()
-    console.log(params)
     if (!routerRecord || !params.StartDate || !params.EndDate || this.range.invalid) {
       this.messagesErrorService.add('Erro! Verifique os campos selecionados ')
       return
@@ -127,13 +125,12 @@ export class RelatorioComponent {
         })
 
       }, (erro) => {
-        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+        this.messagesErrorService.add(`Ocorreu um erro nos dados do relatorio! `)
       })
     }
 
     if (routerRecord.Router === 2) {
       this.recordService.getIdStock(params).subscribe((response) => {
-        console.log("Deu Certo: ", response)
         this.recordService.getdownloadRecord(response).subscribe(data => {
           const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           const url = window.URL.createObjectURL(blob);
@@ -147,13 +144,12 @@ export class RelatorioComponent {
         })
 
       }, (erro) => {
-        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+        this.messagesErrorService.add(`Ocorreu um erro nos dados do relatorio! `)
       })
     }
 
     if (routerRecord.Router === 3) {
       this.recordService.getSales(params).subscribe((response) => {
-        console.log("Deu Certo: ", response)
         this.recordService.getdownloadRecord(response).subscribe(data => {
           const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           const url = window.URL.createObjectURL(blob);
@@ -167,7 +163,7 @@ export class RelatorioComponent {
         })
 
       }, (erro) => {
-        this.messagesErrorService.add(`Ocorreu um erro ao gerar o relatorio: ${erro.erro}`)
+        this.messagesErrorService.add(`Ocorreu um erro nos dados do relatorio! `)
       })
     }
 

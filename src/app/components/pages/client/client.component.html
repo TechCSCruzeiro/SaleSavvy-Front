@@ -12,27 +12,27 @@
   
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="id-column">  ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.Id}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
   
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="email-column"> Email </th>
-        <td mat-cell *matCellDef="let row"> {{row.Email}}% </td>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
       </ng-container>
   
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="name-column"> Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="phone-column"> Phone </th>
-        <td mat-cell *matCellDef="let row"> {{row.Phone}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
       </ng-container>
 
       <ng-container matColumnDef="street">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="address-column"> Endereço </th>
-        <td mat-cell *matCellDef="let row"> {{row.Address.Street}}, {{row.Address.Number}} - {{row.Address.District}}  - {{row.Address.City}}</td>
+        <td mat-cell *matCellDef="let row"> {{row.address.street}}, {{row.address.number}} - {{row.address.district}}  - {{row.address.city}}</td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -45,11 +45,11 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="openDialogUpdate(row.Id)">
+                <button mat-menu-item (click)="openDialogUpdate(row.id)">
                   <mat-icon>edit</mat-icon>
                   <span>Editar</span>
                 </button>
-                <button mat-menu-item (click)="openDialogRemove(row.Id, row.Name)">
+                <button mat-menu-item (click)="openDialogRemove(row.id, row.name)">
                   <mat-icon>delete_forever</mat-icon>
                   <span>Excluir</span>
                 </button>
@@ -57,7 +57,7 @@
         </td>
       </ng-container>
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        <td class="mat-cell" colspan="4">Nenhum dado correspondente ao filtro "{{input.value}}"</td>
       </tr>
     </table>
   

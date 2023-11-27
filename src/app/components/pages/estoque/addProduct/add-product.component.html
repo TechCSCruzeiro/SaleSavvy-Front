@@ -26,8 +26,8 @@
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="price" placeholder="Valor" name="price" formControlName="price" step="1" appCurrencyFormatter>
                 <label for="floatingPassword">Preço</label>
-                <div class="text-danger ms-2 mt-1" *ngIf="price.invalid && formDir.submitted">
-                  <p>Preço invalida</p>
+                <div class="text-danger ms-2 mt-1" *ngIf="(price.invalid || price.errors?.['isNaN']) && formDir.submitted">
+                  <p>Preço invalido</p>
                 </div>
               </div>
               <div class="form-floating">
@@ -35,7 +35,7 @@
                 (input)="onInputChange($event)">
                 <label for="floatingPassword">Quantidade</label>
                 <div class="text-danger ms-2 mt-1" *ngIf="quantity.invalid && formDir.submitted">
-                  <p>Valor invalido coincidem</p>
+                  <p>Valor invalido </p>
                 </div>
               </div>
               <div class="form-floating mt-4">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/Models/Product';
 import { AuthenticationService } from 'src/app/service/auth.service';
@@ -19,12 +19,12 @@ export class AddProductComponent implements OnInit {
   UserId: string = ''
 
   constructor(
-    private estoqueService: EstoqueService, 
-    public messagesSucessService: MessagesSuccessService, 
-    public messagesErrorService: MessagesErrorService, 
-    private router: Router, 
+    private estoqueService: EstoqueService,
+    public messagesSucessService: MessagesSuccessService,
+    public messagesErrorService: MessagesErrorService,
+    private router: Router,
     private authService: AuthenticationService,
-    ) {
+  ) {
 
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.UserId = decodeToken.employeeId
@@ -33,8 +33,8 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.productForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required,]),
+      price: new FormControl('', [Validators.required, this.nanValidator]),
       quantity: new FormControl('', [Validators.required])
     })
   }
@@ -52,20 +52,32 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('quantity')!
   }
 
+  nanValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const convertCurrency = new ConvertCurrency();
+    const numericValue = convertCurrency.formatCurrencyToNumber(control.value);
+    if (numericValue === null) {
+      return { 'isNaN': true };
+    }
+    return null;
+  }
+
   FormProduct(form: FormGroup): Product {
     const converter = new ConvertCurrency();
+    let price = converter.formatCurrencyToNumber(form.get('price')!.value);
+    if (price === null) {
+      price = 0;
+    }
     return {
       Id: '',
       Name: form.get('name')!.value,
       UserID: this.UserId,
       Description: form.get('description')!.value,
-      Price: converter.formatCurrencyToNumber(form.get('price')!.value),
+      Price: price,
       Quantity: Number(form.get('quantity')!.value),
     }
   }
 
   submit() {
-
     if (this.productForm.invalid) {
       return;
     }

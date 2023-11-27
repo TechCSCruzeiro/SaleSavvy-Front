@@ -8,7 +8,6 @@ import { CheckoutService } from 'src/app/service/checkout.service';
 import { ImportClientSaleService } from 'src/app/service/import-clientSale.service';
 import { MessagesErrorService } from 'src/app/service/messages-error.service';
 import { TransactionalService } from 'src/app/service/transactional.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Payment {
   value: string;
@@ -39,7 +38,6 @@ export class PaymentComponent {
     public messagesErrorService: MessagesErrorService,
     private authService: AuthenticationService,
     private transactionalService: TransactionalService,
-    private snackBar: MatSnackBar
   ) {
     const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
     this.userId = decodeToken.employeeId
@@ -129,12 +127,10 @@ export class PaymentComponent {
         this.payment.parcel ?? 0,
         this.payment.value)
         this.transactionalService.transaction(confirmPayment).subscribe((response)=>{
-          this.snackBar.open('Venda finalizada com sucesso!', 'Fechar', {
-            duration: 3000,
-          });
+          alert('Venda finalizada com sucesso!');
           location.reload();
         },(error)=>{
-          console.log(error)
+          this.messagesErrorService.add('Ocorreu um erro ao processar a venda')
         })
 
 

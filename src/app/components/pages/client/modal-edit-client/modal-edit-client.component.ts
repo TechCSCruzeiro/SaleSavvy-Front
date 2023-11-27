@@ -31,7 +31,7 @@ export class ModalEditClientComponent {
   }
 
   ngOnInit() {
-    this.clientService.getClientById(this.clientId).subscribe(
+    this.clientService.postClientById(this.clientId).subscribe(
       (clients: any) => {
 
         this.client = {
@@ -105,7 +105,5 @@ export class ModalEditClientComponent {
     if (this.clientForm.invalid) {
       return
     }
-    console.log(this.clientForm.value)
-    console.log("Fomulario Valido")
   }
 }

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import {Observable} from 'rxjs';
 import { SalesConfirmation } from '../Models/SalesConfirmation';
-import { environment } from '../environments/environmet';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',

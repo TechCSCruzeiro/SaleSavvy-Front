@@ -6,6 +6,8 @@ import { Client } from 'src/app/Models/Client';
 import { ModalRemoveClientComponent } from './modal-remove-client/modal-remove-client.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEditClientComponent } from './modal-edit-client/modal-edit-client.component';
+import { ClientService } from 'src/app/service/client.service';
+import { AuthenticationService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -16,55 +18,30 @@ import { ModalEditClientComponent } from './modal-edit-client/modal-edit-client.
 export class ClientComponent {
   displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'street', 'actions'];
   dataSource: MatTableDataSource<Client>;
+  UserId: string = ''
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  client: Client[] = [
-    {
-      Id: "6594b91e-a027-4db2-85b2-f37f6726b194",
-      Name: "Piassa Alves da silva Silveira",
-      Email: "piassa@email.com",
-      Phone: "11968395467",
-      Address: { Number: "10", Code: "06824425", State: "Sp", City: "Embu das Artes", District: "Jardim Angela", Street: "Rua Marfim" },
-      UserID: "94837c79-ec70-41ce-8b1a-695d2ebdc5df"
-    },
-    {
-      Id: "6594b91e-a027-4db2-85b2-f37f6726b194",
-      Name: "Piassa Alves da silva Silveira",
-      Email: "piassa@email.com",
-      Phone: "11968395467",
-      Address: { Number: "10", Code: "06824425", State: "Sp", City: "Embu das Artes", District: "Jardim Angela", Street: "Rua Marfim" },
-      UserID: "94837c79-ec70-41ce-8b1a-695d2ebdc5df"
-    },
-    {
-      Id: "6594b91e-a027-4db2-85b2-f37f6726b194",
-      Name: "Piassa Alves da silva Silveira",
-      Email: "piassa@email.com",
-      Phone: "11968395467",
-      Address: { Number: "10", Code: "06824425", State: "Sp", City: "Embu das Artes", District: "Jardim Angela", Street: "Rua Marfim" },
-      UserID: "94837c79-ec70-41ce-8b1a-695d2ebdc5df"
-    },
-    {
-      Id: "6594b91e-a027-4db2-85b2-f37f6726b194",
-      Name: "Piassa Alves da silva Silveira",
-      Email: "piassa@email.com",
-      Phone: "11968395467",
-      Address: { Number: "10", Code: "06824425", State: "Sp", City: "Embu das Artes", District: "Jardim Angela", Street: "Rua Marfim" },
-      UserID: "94837c79-ec70-41ce-8b1a-695d2ebdc5df"
-    }
-  ]
-
   constructor(
     public dialog: MatDialog,
-  ) {
+    private clientService: ClientService,
+    private authService: AuthenticationService
+  ) 
+  {
+    const decodeToken = this.authService.decodeToken(localStorage.getItem('access-token'))
+    this.UserId = decodeToken.employeeId
 
-    this.dataSource = new MatTableDataSource(this.client);
+    this.dataSource = new MatTableDataSource();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    this.clientService.postListClient(this.UserId).subscribe(clients =>{
+      this.dataSource.data = clients
+    })
   }
 
   applyFilter(event: Event) {

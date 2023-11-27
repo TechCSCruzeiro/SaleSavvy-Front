@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable} from 'rxjs';
 import { Record } from '../Models/Record';
 import { Product } from '../Models/Product';
-import { environment } from '../environments/environmet';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',

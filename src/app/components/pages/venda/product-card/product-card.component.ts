@@ -48,7 +48,7 @@ export class ProductCardComponent {
     this.transactionsDataSource.connect();
     this.exportProductCartService.idProduct$.subscribe((idProduct) => {
       if (typeof idProduct == undefined || idProduct == null) {
-        console.log("Produto não localizado")
+        this.messagesErrorService.add('Produto não localizado')
       } else {
         this.estoqueService.getUserById(idProduct).subscribe((product: any) => {
           this.productAdded = {
@@ -82,14 +82,14 @@ export class ProductCardComponent {
     return totalValue;
   }
 
-  sendListProduct() { //Enviando Array para o component Venda
+  sendListProduct() {
     this.exportProductCartService.changeProduct(this.transactions);
     
   }
 
   ModalAddProduct() {
     const dialogRef = this.dialog.open(ModalAddProductComponent, {
-      width: 'auto', // Defina a largura do modal conforme necessário
+      width: 'auto',
     })
   }
 

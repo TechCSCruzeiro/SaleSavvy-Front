@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Client } from '../Models/Client'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../environments/environmet';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ClientService {
     private apiUrlPostList = environment.apiUrl.concat('/Client/Search/ListClient?userId=')
     private apiUrlDelete = 'Deletar'
     private apiUrlPut = 'Link Modificar'
-    private apiUrlGetById = environment.apiUrl.concat('/Client/Search/Client?userId=')
+    private apiUrlPostById = environment.apiUrl.concat('/Client/Search/Client?userId=')
 
     postListClient(userId: string): Observable<Client[]>{
         return this.http.get<Client[]>(`${this.apiUrlPostList}${userId}`);
@@ -29,12 +29,8 @@ export class ClientService {
                  'Content-Type': 'application/json'
              })
          };
-         return this.http.post<Client>(`${this.apiUrlGetById}${clientId}`, httpOptions)
+         return this.http.post<Client>(`${this.apiUrlPostById}${clientId}`, httpOptions)
      }
-
-    getClientById(clientId: string): Observable<Client>{
-        return this.http.get<Client>(`${this.apiUrlGetById}${clientId}`);
-    }
 
     updateUser(updateClient: Client): Observable<Client>{
          return this.http.put<Client>(`${this.apiUrlPut}/${updateClient.Id}`, updateClient);

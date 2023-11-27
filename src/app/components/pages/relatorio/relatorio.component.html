@@ -16,7 +16,7 @@
                         <mat-error *ngIf="relatorioControl.hasError('required')">Escolha um tipo de relatorio</mat-error>
                     </mat-form-field>
                     <div>
-                      <button mat-button matStepperNext *ngIf="relatorioControl.value">Next</button>
+                      <button mat-button matStepperNext *ngIf="relatorioControl.value">Proximo</button>
                     </div>
                   </form>
                 </mat-step>
@@ -42,8 +42,8 @@
                         </div>
                       
                     <div>
-                      <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button matStepperNext>Next</button>
+                      <button mat-button matStepperPrevious>Voltar</button>
+                      <button mat-button matStepperNext>Proximo</button>
                     </div>
                   </form>
                 </mat-step>
@@ -51,7 +51,7 @@
                   <ng-template matStepLabel>Gerar relatorio</ng-template>
                   <p>Clique em <strong>Baixar</strong>  para gerar o relatorio</p>
                   <div>
-                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperPrevious>Voltar</button>
                     <button mat-button (click)="generateReport()">Baixar</button>
                   </div>
                 </mat-step>

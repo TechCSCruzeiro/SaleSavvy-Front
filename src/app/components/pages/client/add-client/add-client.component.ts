@@ -20,8 +20,12 @@ export class AddClientComponent {
 
   usuarioForm!: FormGroup
 
-  constructor(private usuarioService: UsuarioService, public messagesSucessService: MessagesSuccessService, public messagesErrorService: MessagesErrorService ,private router: Router ) {
-  }
+  constructor(
+    private usuarioService: UsuarioService, 
+    public messagesSucessService: MessagesSuccessService, 
+    public messagesErrorService: MessagesErrorService, 
+    private router: Router 
+    ){}
 
   ngOnInit(): void {
     this.usuarioForm = new FormGroup({
@@ -64,8 +68,6 @@ export class AddClientComponent {
       this.messagesSucessService.add("Usuario Criado Com sucesso")
       this.router.navigate(['/'])
     },(error) =>{
-      const returnApi = error
-      console.log("Retorno da API > ", returnApi)
       this.messagesErrorService.add('Erro ao Criar o usuario ' + error.error)
       this.router.navigate(['/'])
     })
